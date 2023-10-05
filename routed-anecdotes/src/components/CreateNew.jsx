@@ -1,31 +1,40 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import NotificationContext from "../NotificationContext";
+import { useField } from "../hooks";
 
 export const CreateNew = ({ setAnecdotes }) => {
   const [notification, setNotification] = useContext(NotificationContext);
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
+
+  const content = useField("text");
+  const info = useField("text");
+  const author = useField("text");
 
   const navigate = useNavigate();
+
   function setId() {
     return Math.floor(Math.random() * 1000);
   }
+
+  const reset = () => {
+    content.reset();
+    author.reset();
+    info.reset();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setAnecdotes((prev) => [
       ...prev,
       {
-        content,
-        author,
-        info,
+        content: content.value,
+        auhtor: author.value,
+        info: info.value,
         votes: 0,
         id: setId(),
       },
     ]);
-    setNotification(`Anecdote "${content}" created.`);
+    setNotification(`Anecdote "${content.value}" created.`);
     navigate("/");
   };
 
@@ -35,33 +44,19 @@ export const CreateNew = ({ setAnecdotes }) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input
-            required
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <input name="content" {...content} reset="" />
         </div>
         <div>
           author
-          <input
-            required
-            name="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <input name="author" {...author} reset="" />
         </div>
         <div>
           url for more info
-          <input
-            required
-            name="info"
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <input name="info" {...info} reset="" />
         </div>
-        <button>create</button>
+        <button type="submit">Submit</button>
       </form>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 };
