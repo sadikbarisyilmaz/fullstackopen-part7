@@ -15,10 +15,9 @@ const blogSlice = createSlice({
             return state.filter(blog => blog.id !== action.payload.id)
         },
         setBlogs(state, action) {
-            return state.concat(action.payload)
+            return action.payload
         },
         appendBlog(state, action) {
-            console.log(action.payload);
             return state.concat(action.payload)
         }
     },

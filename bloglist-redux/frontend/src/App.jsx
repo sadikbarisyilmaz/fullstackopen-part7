@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Blog } from "./components/Blog";
-import { createBlog, getAll, updateBlog } from "./services/blogs";
+import { createBlog, updateBlog } from "./services/blogs";
 import { login } from "./services/login";
 import { Notification } from "./components/Notification";
 import { LoginForm } from "./components/LoginForm";
 import { BlogForm } from "./components/BlogForm";
 import { useDispatch, useSelector } from "react-redux";
 import { newNotification } from "./reducers/notificationReducer";
-import { addBlog, initializeBlogs, likeBlog } from "./reducers/blogsReducer";
+import { initializeBlogs, likeBlog } from "./reducers/blogsReducer";
 import { loginUser } from "./reducers/userReducer";
 
 const App = () => {
@@ -73,9 +73,8 @@ const App = () => {
 
   const handleSubmit = async (blogForm, setBlogForm) => {
     const response = await createBlog(blogForm, user.token);
-    const newBlog = { ...blogForm, id: Math.floor(Math.random() * 1000) };
     if (response.status === 201) {
-      dispatch(addBlog(newBlog));
+      dispatch(initializeBlogs());
       showNotification(
         `A new blog "${blogForm.title}" by "${blogForm.author}" added`,
         "success"
@@ -91,7 +90,7 @@ const App = () => {
       showNotification(response.data.error, "fail");
     }
   };
-  console.log(user);
+
   const notif = useSelector((state) => state.notification);
   return (
     <div>
@@ -125,8 +124,8 @@ const App = () => {
 
             <h3>Blogs</h3>
             <div className="blog">
-              {blogs
-                // .sort((a, b) => b.likes - a.likes)
+              {[...blogs]
+                .sort((a, b) => b.likes - a.likes)
                 .map((blog) => (
                   <Blog
                     key={blog.id}
