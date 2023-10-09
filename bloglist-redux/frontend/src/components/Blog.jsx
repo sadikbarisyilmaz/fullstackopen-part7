@@ -4,7 +4,13 @@ import { deleteBlog } from "../services/blogs";
 import { removeBlogs } from "../reducers/blogsReducer";
 import { newNotification } from "../reducers/notificationReducer";
 
-export const Blog = ({ blog, token, username, handleLike }) => {
+export const Blog = ({
+  blog,
+  token,
+  username,
+  handleLike,
+  showNotification,
+}) => {
   const [toggle, setToggle] = useState(false);
   const blogStyle = {
     padding: 10,
@@ -18,14 +24,12 @@ export const Blog = ({ blog, token, username, handleLike }) => {
       dispatch(removeBlogs(blog));
       deleteBlog(token, blog.id).then((e) => {
         if (e.status === 204) {
-          dispatch(
-            newNotification([
-              `Removed "${blog.title}" by ${blog.author}`,
-              "success",
-            ])
+          showNotification(
+            `Removed "${blog.title}" by ${blog.author}`,
+            "success"
           );
         } else {
-          newNotification([`Blot not found`, "fail"]);
+          showNotification(`Blot not found`, "fail");
         }
       });
     } else {

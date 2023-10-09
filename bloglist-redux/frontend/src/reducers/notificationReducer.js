@@ -15,7 +15,6 @@ export const { setNotification } = notificationSlice.actions
 
 export const newNotification = (notification) => {
     return async dispatch => {
-
         dispatch(setNotification(notification))
     }
 }

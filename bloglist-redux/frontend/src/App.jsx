@@ -20,7 +20,6 @@ const App = () => {
   const blogs = useSelector((state) => state.blogs);
 
   useEffect(() => {
-    // dispatch(setInitialBlogs());
     dispatch(initializeBlogs());
     if (window.localStorage.getItem("loggedUser")) {
       const loggedUser = window.localStorage.getItem("loggedUser");
@@ -32,25 +31,19 @@ const App = () => {
     const likedBlog = { ...blog, likes: blog.likes + 1 };
     updateBlog(likedBlog, token, blog.id).then((e) => {
       if (e.status === 201) {
-        dispatch(
-          newNotification([
-            `Liked "${blog.title}" by ${blog.author}`,
-            "success",
-          ])
-        );
+        showNotification(`Liked "${blog.title}" by ${blog.author}`, "success");
       } else {
-        dispatch(newNotification([`Like failed`, "fail"]));
+        showNotification(`Like failed`, "fail");
       }
     });
     dispatch(likeBlog(likedBlog));
   };
 
-  const showNotification = (msg, type) => {
-    setErrorMessage(msg);
-    setNotification(type);
+  const showNotification = async (msg, type) => {
+    dispatch(newNotification([msg, type]));
     setTimeout(() => {
-      setErrorMessage(null);
-    }, 1000);
+      dispatch(newNotification([]));
+    }, 5000);
   };
 
   const handleLogin = async (e) => {
@@ -82,11 +75,9 @@ const App = () => {
     const newBlog = { ...blogForm, id: Math.floor(Math.random() * 1000) };
     if (response.status === 201) {
       dispatch(addBlog(newBlog));
-      dispatch(
-        newNotification([
-          `A new blog "${blogForm.title}" by "${blogForm.author}" added`,
-          "success",
-        ])
+      showNotification(
+        `A new blog "${blogForm.title}" by "${blogForm.author}" added`,
+        "success"
       );
       setBlogForm({
         title: "",
@@ -96,7 +87,7 @@ const App = () => {
       setShowBlogForm(false);
       return blogForm;
     } else {
-      dispatch(newNotification([response.data.error, "fail"]));
+      showNotification(response.data.error, "fail");
     }
   };
 
@@ -140,6 +131,7 @@ const App = () => {
                     token={user.token}
                     username={user.username}
                     handleLike={handleLike}
+                    showNotification={showNotification}
                   />
                 ))}
             </div>

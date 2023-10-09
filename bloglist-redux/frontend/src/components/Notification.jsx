@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export const Notification = () => {
   const notif = useSelector((state) => state.notification);
 
-  return <div className={notif[1]}>{notif}</div>;
+  return <div className={notif[1]}>{notif[0]}</div>;
 };
 
 Notification.propTypes = {
