@@ -122,6 +122,7 @@ const App = () => {
               </>
             )}
             <br />
+
             <h3>Blogs</h3>
             <div className="blog">
               {blogs
