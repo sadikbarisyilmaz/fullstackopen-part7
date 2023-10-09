@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteBlog } from "../services/blogs";
 import { removeBlogs } from "../reducers/blogsReducer";
-import { newNotification } from "../reducers/notificationReducer";
 
 export const Blog = ({
   blog,

@@ -31,6 +31,7 @@ describe('Blog List', function () {
       // cy.get('#password').type('sekret')
       // cy.get('#login-button').click()
       cy.login({ username: 'test-user-username', password: 'sekret' })
+      cy.wait(500)
       cy.contains('test-user-name logged in')
 
     })
@@ -68,6 +69,7 @@ describe('Blog List', function () {
       it('a new blog can be liked', function () {
 
         cy.contains('test title - test author')
+
         cy.contains('View').click()
         cy.contains('Like').click()
         cy.get(".likes").contains('1')

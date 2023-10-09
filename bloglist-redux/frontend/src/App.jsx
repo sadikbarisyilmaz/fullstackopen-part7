@@ -11,7 +11,6 @@ import { addBlog, initializeBlogs, likeBlog } from "./reducers/blogsReducer";
 import { loginUser } from "./reducers/userReducer";
 
 const App = () => {
-  // const [user, setUser] = useState(null);
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [loginFormData, setLoginFormData] = useState({
     username: "",
@@ -25,8 +24,7 @@ const App = () => {
     dispatch(initializeBlogs());
     if (window.localStorage.getItem("loggedUser")) {
       const loggedUser = window.localStorage.getItem("loggedUser");
-      dispatch(loginUser(loggedUser));
-      // setUser(JSON.parse(loggedUser));
+      dispatch(loginUser(JSON.parse(loggedUser)));
     }
   }, []);
 
@@ -56,34 +54,19 @@ const App = () => {
         showNotification("Login Successfull", "success");
         const cridentials = e.data;
         dispatch(loginUser(cridentials));
-        // setUser(cridentials);
         window.localStorage.setItem("loggedUser", JSON.stringify(cridentials));
         setLoginFormData({
           username: "",
           password: "",
         });
       } else {
-        showNotification(response.data.error, "fail");
+        showNotification("invalid username or password", "fail");
       }
     });
-
-    // if (response.status === 200) {
-    //   showNotification("Login Successfull", "success");
-    //   const cridentials = response.data;
-    //   setUser(cridentials);
-    //   window.localStorage.setItem("loggedUser", JSON.stringify(cridentials));
-    //   setLoginFormData({
-    //     username: "",
-    //     password: "",
-    //   });
-    // } else {
-    //   showNotification(response.data.error, "fail");
-    // }
   };
 
   const logout = () => {
     dispatch(loginUser(null));
-    // setUser(null);
     window.localStorage.removeItem("loggedUser");
     showNotification("Logout Successful", "success");
   };
@@ -108,7 +91,7 @@ const App = () => {
       showNotification(response.data.error, "fail");
     }
   };
-
+  console.log(user);
   const notif = useSelector((state) => state.notification);
   return (
     <div>
@@ -119,7 +102,8 @@ const App = () => {
         {user && (
           <>
             <h2>
-              {user.name} logged in <button onClick={logout}>Logout</button>
+              {user && user.name} logged in{" "}
+              <button onClick={logout}>Logout</button>
             </h2>
 
             {!showBlogForm && (
