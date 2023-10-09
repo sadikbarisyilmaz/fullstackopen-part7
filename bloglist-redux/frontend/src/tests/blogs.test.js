@@ -2,9 +2,8 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { Blog } from '../components/Blog'
 import userEvent from '@testing-library/user-event'
-
-
-
+import { Provider } from "react-redux";
+import store from '../store';
 
 const blog =
 {
@@ -16,7 +15,11 @@ const blog =
 }
 
 test("renders the blogs title and author, but does not render its URL or number of likes by default", () => {
-    const { container } = render(<Blog blog={blog} />)
+    const { container } = render(
+        < Provider store={store} >
+            <Blog blog={blog} />
+        </Provider >
+    )
     const title = container.querySelector('.title')
     const author = container.querySelector('.author')
     const url = container.querySelector('.url')
@@ -35,7 +38,9 @@ test('blogs URL and number of likes are shown when the button controlling the sh
     const mockHandler = jest.fn()
 
     const { container } = render(
-        <Blog blog={blog} view={mockHandler} />
+        <Provider store={store}>
+            <Blog blog={blog} view={mockHandler} />
+        </Provider>
     )
 
     const user = userEvent.setup()
@@ -43,8 +48,6 @@ test('blogs URL and number of likes are shown when the button controlling the sh
     await user.click(button)
     const url = container.querySelector('.url')
     const likes = container.querySelector('.likes')
-
-    screen.debug(button)
 
     expect(url).toHaveTextContent(
         "https://www.google.com"
@@ -58,7 +61,9 @@ test('if the like button is clicked twice, the event handler the component recei
     const mockHandler = jest.fn()
 
     render(
-        <Blog blog={blog} handleLike={mockHandler} />
+        <Provider store={store}>
+            <Blog blog={blog} handleLike={mockHandler} />
+        </Provider>
     )
 
     const user = userEvent.setup()
