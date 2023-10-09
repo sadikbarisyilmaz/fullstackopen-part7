@@ -19,6 +19,4 @@ export const newNotification = (notification) => {
     }
 }
 
-
-
 export default notificationSlice.reducer

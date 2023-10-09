@@ -8,9 +8,10 @@ import { BlogForm } from "./components/BlogForm";
 import { useDispatch, useSelector } from "react-redux";
 import { newNotification } from "./reducers/notificationReducer";
 import { addBlog, initializeBlogs, likeBlog } from "./reducers/blogsReducer";
+import { loginUser } from "./reducers/userReducer";
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [loginFormData, setLoginFormData] = useState({
     username: "",
@@ -18,12 +19,14 @@ const App = () => {
   });
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(initializeBlogs());
     if (window.localStorage.getItem("loggedUser")) {
       const loggedUser = window.localStorage.getItem("loggedUser");
-      setUser(JSON.parse(loggedUser));
+      dispatch(loginUser(loggedUser));
+      // setUser(JSON.parse(loggedUser));
     }
   }, []);
 
@@ -48,24 +51,39 @@ const App = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await login(loginFormData);
+    login(loginFormData).then((e) => {
+      if (e.status === 200) {
+        showNotification("Login Successfull", "success");
+        const cridentials = e.data;
+        dispatch(loginUser(cridentials));
+        // setUser(cridentials);
+        window.localStorage.setItem("loggedUser", JSON.stringify(cridentials));
+        setLoginFormData({
+          username: "",
+          password: "",
+        });
+      } else {
+        showNotification(response.data.error, "fail");
+      }
+    });
 
-    if (response.status === 200) {
-      showNotification("Login Successfull", "success");
-      const cridentials = response.data;
-      setUser(cridentials);
-      window.localStorage.setItem("loggedUser", JSON.stringify(cridentials));
-      setLoginFormData({
-        username: "",
-        password: "",
-      });
-    } else {
-      showNotification(response.data.error, "fail");
-    }
+    // if (response.status === 200) {
+    //   showNotification("Login Successfull", "success");
+    //   const cridentials = response.data;
+    //   setUser(cridentials);
+    //   window.localStorage.setItem("loggedUser", JSON.stringify(cridentials));
+    //   setLoginFormData({
+    //     username: "",
+    //     password: "",
+    //   });
+    // } else {
+    //   showNotification(response.data.error, "fail");
+    // }
   };
 
   const logout = () => {
-    setUser(null);
+    dispatch(loginUser(null));
+    // setUser(null);
     window.localStorage.removeItem("loggedUser");
     showNotification("Logout Successful", "success");
   };
