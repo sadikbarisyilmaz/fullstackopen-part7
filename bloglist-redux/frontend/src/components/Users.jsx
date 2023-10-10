@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../services/users";
 import { initializeUsers } from "../reducers/usersReducer";
 import { useEffect } from "react";
+import { Routes, Route, Link, useMatch } from "react-router-dom";
 
-export const Users = () => {
+export const Users = ({ users }) => {
+  //   const dispatch = useDispatch();
+  //   useEffect(() => {
+  //     dispatch(initializeUsers());
+  //   }, []);
+
   //   const users = useSelector((state) => state.users);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(initializeUsers());
-  }, []);
 
-  const users = useSelector((state) => state.users);
-  console.log(users);
   return (
     <div>
       <h1>Users</h1>
@@ -21,7 +20,7 @@ export const Users = () => {
             return (
               <li key={i}>
                 <div>
-                  {user.name}
+                  <Link to={`/users/${user.id}`}>{user.name}</Link>
                   <span> {user.blogs.length}</span>
                 </div>
               </li>

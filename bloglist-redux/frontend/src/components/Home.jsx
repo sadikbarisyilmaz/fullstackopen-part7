@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, useMatch } from "react-router-dom";
 
-import { Blog } from "./Blog";
+import { BlogList } from "./BlogList";
 import { createBlog, updateBlog } from "../services/blogs";
 import { login } from "../services/login";
 import { Notification } from "./Notification";
@@ -129,7 +129,7 @@ const Home = () => {
               {[...blogs]
                 .sort((a, b) => b.likes - a.likes)
                 .map((blog) => (
-                  <Blog
+                  <BlogList
                     key={blog.id}
                     blog={blog}
                     token={user.token}

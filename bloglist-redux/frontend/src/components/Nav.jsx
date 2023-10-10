@@ -5,6 +5,7 @@ export const Nav = () => {
     <div>
       <Link to="/">Home</Link>
       <Link to="/users">Users</Link>
+      <hr />
     </div>
   );
 };
