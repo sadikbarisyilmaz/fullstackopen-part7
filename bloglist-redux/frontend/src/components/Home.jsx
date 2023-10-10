@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { newNotification } from "../reducers/notificationReducer";
 import { initializeBlogs, likeBlog } from "../reducers/blogsReducer";
 import { loginUser } from "../reducers/userReducer";
-import { Users } from "./Users";
 
 const Home = () => {
   const [showBlogForm, setShowBlogForm] = useState(false);
