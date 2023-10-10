@@ -9,7 +9,7 @@ import { newNotification } from "../reducers/notificationReducer";
 import { likeBlog } from "../reducers/blogsReducer";
 import { loginUser } from "../reducers/userReducer";
 
-const Home = ({ blogs, initializeBlogs }) => {
+const Home = ({ blogs, initializeBlogs, user }) => {
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [loginFormData, setLoginFormData] = useState({
     username: "",
@@ -17,7 +17,7 @@ const Home = ({ blogs, initializeBlogs }) => {
   });
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
 
   const handleLike = async (blog, token) => {
     const likedBlog = { ...blog, likes: blog.likes + 1 };
@@ -56,11 +56,11 @@ const Home = ({ blogs, initializeBlogs }) => {
     });
   };
 
-  const logout = () => {
-    dispatch(loginUser(null));
-    window.localStorage.removeItem("loggedUser");
-    showNotification("Logout Successful", "success");
-  };
+  // const logout = () => {
+  //   dispatch(loginUser(null));
+  //   window.localStorage.removeItem("loggedUser");
+  //   showNotification("Logout Successful", "success");
+  // };
 
   const handleSubmit = async (blogForm, setBlogForm) => {
     const response = await createBlog(blogForm, user.token);
@@ -85,13 +85,13 @@ const Home = ({ blogs, initializeBlogs }) => {
   return (
     <div>
       <div>
-        <h1>Blogssss</h1>
+        <h1>BlogLister</h1>
         {user && (
           <>
-            <h2>
+            {/* <h2>
               {user && user.name} logged in{" "}
               <button onClick={logout}>Logout</button>
-            </h2>
+            </h2> */}
 
             {!showBlogForm && (
               <button onClick={() => setShowBlogForm(true)}>New Blog</button>

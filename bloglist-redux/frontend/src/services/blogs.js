@@ -54,3 +54,15 @@ export const updateBlog = async (data, token, id) => {
   }
 
 }
+
+export const addComment = async (data, id) => {
+  try {
+    const request = axios.put(`${baseUrl}/${id}`, data)
+    const response = await request
+    return response
+
+  } catch (error) {
+    return error.response
+  }
+
+}

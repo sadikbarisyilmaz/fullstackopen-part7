@@ -15,7 +15,6 @@ import { Notification } from "./components/Notification";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("App mounted");
     dispatch(initializeUsers());
     dispatch(initializeBlogs());
     if (window.localStorage.getItem("loggedUser")) {
@@ -27,6 +26,7 @@ const App = () => {
   const users = useSelector((state) => state.users);
   const blogs = useSelector((state) => state.blogs);
   const notif = useSelector((state) => state.notification);
+  const loggedUser = useSelector((state) => state.user);
 
   const matchUser = useMatch("/users/:id");
   const matchBlog = useMatch("/blogs/:id");
@@ -39,12 +39,18 @@ const App = () => {
 
   return (
     <div>
-      <Nav />
+      <Nav user={loggedUser} />
       {notif && <Notification />}
       <Routes>
         <Route
           path="/"
-          element={<Home blogs={blogs} initializeBlogs={initializeBlogs} />}
+          element={
+            <Home
+              blogs={blogs}
+              user={loggedUser}
+              initializeBlogs={initializeBlogs}
+            />
+          }
         />
         <Route path="/users" element={<Users users={users} />} />
         <Route path="/users/:id" element={<User user={user} />} />

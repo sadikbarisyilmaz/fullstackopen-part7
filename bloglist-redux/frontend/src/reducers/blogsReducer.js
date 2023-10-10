@@ -7,8 +7,15 @@ const blogSlice = createSlice({
     reducers: {
         like(state, action) {
             const likedBlog = action.payload
-            return state.map(anecdote =>
-                anecdote.id !== likedBlog.id ? anecdote : likedBlog
+            return state.map(blog =>
+                blog.id !== likedBlog.id ? blog : likedBlog
+            )
+        },
+        comment(state, action) {
+            console.log(action);
+            const commentedBlog = action.payload
+            return state.map(blog =>
+                blog.id !== commentedBlog.id ? blog : commentedBlog
             )
         },
         deleteBlog(state, action) {
@@ -23,7 +30,7 @@ const blogSlice = createSlice({
     },
 });
 
-export const { setBlogs, like, deleteBlog, appendBlog } = blogSlice.actions
+export const { setBlogs, like, deleteBlog, appendBlog, comment } = blogSlice.actions
 
 export const initializeBlogs = () => {
     return async dispatch => {
@@ -47,6 +54,14 @@ export const removeBlogs = (blog) => {
 export const likeBlog = (blog) => {
     return async dispatch => {
         dispatch(like(blog))
+    }
+}
+
+export const commentBlog = (blog) => {
+    console.log(blog);
+
+    return async dispatch => {
+        dispatch(comment(blog))
     }
 }
 

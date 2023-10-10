@@ -11,6 +11,10 @@ const blogSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    comments: {
+        type: Schema.Types.Array,
+        ref: 'Comments'
     }
 })
 
