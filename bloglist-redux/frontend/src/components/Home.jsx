@@ -1,34 +1,23 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, Link, useMatch } from "react-router-dom";
-
+import { useState } from "react";
 import { BlogList } from "./BlogList";
 import { createBlog, updateBlog } from "../services/blogs";
 import { login } from "../services/login";
-import { Notification } from "./Notification";
 import { LoginForm } from "./LoginForm";
 import { BlogForm } from "./BlogForm";
 import { useDispatch, useSelector } from "react-redux";
 import { newNotification } from "../reducers/notificationReducer";
-import { initializeBlogs, likeBlog } from "../reducers/blogsReducer";
+import { likeBlog } from "../reducers/blogsReducer";
 import { loginUser } from "../reducers/userReducer";
 
-const Home = () => {
+const Home = ({ blogs, initializeBlogs }) => {
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [loginFormData, setLoginFormData] = useState({
     username: "",
     password: "",
   });
-  const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blogs);
-  const user = useSelector((state) => state.user);
 
-  useEffect(() => {
-    dispatch(initializeBlogs());
-    if (window.localStorage.getItem("loggedUser")) {
-      const loggedUser = window.localStorage.getItem("loggedUser");
-      dispatch(loginUser(JSON.parse(loggedUser)));
-    }
-  }, []);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const handleLike = async (blog, token) => {
     const likedBlog = { ...blog, likes: blog.likes + 1 };
@@ -93,13 +82,10 @@ const Home = () => {
     }
   };
 
-  const notif = useSelector((state) => state.notification);
   return (
     <div>
       <div>
         <h1>Blogssss</h1>
-        {notif && <Notification />}
-
         {user && (
           <>
             <h2>

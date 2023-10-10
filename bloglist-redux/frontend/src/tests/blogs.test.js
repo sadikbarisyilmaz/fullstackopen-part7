@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { Blog } from '../components/Blog'
+import { BlogList } from '../components/BlogList'
 import userEvent from '@testing-library/user-event'
 import { Provider } from "react-redux";
 import store from '../store';
@@ -17,7 +17,7 @@ const blog =
 test("renders the blogs title and author, but does not render its URL or number of likes by default", () => {
     const { container } = render(
         < Provider store={store} >
-            <Blog blog={blog} />
+            <BlogList blog={blog} />
         </Provider >
     )
     const title = container.querySelector('.title')
@@ -39,7 +39,7 @@ test('blogs URL and number of likes are shown when the button controlling the sh
 
     const { container } = render(
         <Provider store={store}>
-            <Blog blog={blog} view={mockHandler} />
+            <BlogList blog={blog} view={mockHandler} />
         </Provider>
     )
 
@@ -62,7 +62,7 @@ test('if the like button is clicked twice, the event handler the component recei
 
     render(
         <Provider store={store}>
-            <Blog blog={blog} handleLike={mockHandler} />
+            <BlogList blog={blog} handleLike={mockHandler} />
         </Provider>
     )
 

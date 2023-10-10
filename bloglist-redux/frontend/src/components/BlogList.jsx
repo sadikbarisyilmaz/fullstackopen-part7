@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteBlog } from "../services/blogs";
 import { removeBlogs } from "../reducers/blogsReducer";
+import { Link } from "react-router-dom";
+import { LikeButton } from "./LikeButton";
 
 export const BlogList = ({
   blog,
   token,
   username,
-  handleLike,
+  handleLike, //for tests ?
   showNotification,
 }) => {
   const [toggle, setToggle] = useState(false);
@@ -39,8 +41,10 @@ export const BlogList = ({
   return (
     <div className="indv-blog" style={blogStyle}>
       <div>
-        <span className="title">{blog.title}</span> -{" "}
-        <span className="author">{blog.author}</span>
+        <span className="title">
+          <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+        </span>
+        ,<span className="author">{blog.author}</span>
         <button
           style={{ marginLeft: 5 }}
           onClick={() => (toggle ? setToggle(false) : setToggle(true))}
@@ -56,10 +60,7 @@ export const BlogList = ({
               {blog.url}
             </a>
           </div>
-          <div>
-            Likes:<span className="likes"> {blog.likes} </span>
-            <button onClick={() => handleLike(blog, token)}>Like</button>
-          </div>
+          <LikeButton blog={blog} />
           <div>Created by: {blog.user.name}</div>
           {username === blog.user.username && (
             <button id="likeButton" onClick={handleDelete}>

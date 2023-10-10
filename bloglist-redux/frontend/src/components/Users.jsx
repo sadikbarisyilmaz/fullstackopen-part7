@@ -4,13 +4,6 @@ import { useEffect } from "react";
 import { Routes, Route, Link, useMatch } from "react-router-dom";
 
 export const Users = ({ users }) => {
-  //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(initializeUsers());
-  //   }, []);
-
-  //   const users = useSelector((state) => state.users);
-
   return (
     <div>
       <h1>Users</h1>
