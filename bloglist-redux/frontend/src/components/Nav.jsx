@@ -25,10 +25,6 @@ export const Nav = ({ loggedUser }) => {
         </h1>
       </div>
       <div className="flex gap-4">
-        <div className="flex justify-center items-center gap-2">
-          <Link to="/">Blogs</Link>
-          <Link to="/users">Users</Link>
-        </div>
         {loggedUser ? (
           <div className="grid">
             <div>{loggedUser.name} Logged In</div>
@@ -37,6 +33,10 @@ export const Nav = ({ loggedUser }) => {
         ) : (
           "Login"
         )}
+        <div className="flex justify-center items-center gap-2">
+          <Link to="/">Blogs</Link>
+          <Link to="/users">Users</Link>
+        </div>
       </div>
     </div>
   );

@@ -39,10 +39,12 @@ export const BlogList = ({
   };
 
   return (
-    <div className="indv-blog" style={blogStyle}>
+    <div style={blogStyle}>
       <div className="flex justify-between">
         <p className="title">
-          <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>{" "}
+          <Link to={`/blogs/${blog.id}`}>
+            <span className="indv-blog">{blog.title}</span>
+          </Link>{" "}
           <span className="author"> - {blog.author}</span>
         </p>
         <button
@@ -59,7 +61,11 @@ export const BlogList = ({
             <a href={blog.url} className="url" target="_blank">
               {blog.url}
             </a>
-            <LikeButton handleLike={handleLike} blog={blog} />
+            <div className="flex gap-2">
+              <label>Likes: </label>
+              <span className="likes">{blog.likes}</span>
+              <LikeButton handleLike={handleLike} blog={blog} />
+            </div>
           </div>
           <div>
             <label>Created by: </label>

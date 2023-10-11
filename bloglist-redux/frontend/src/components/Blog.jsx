@@ -25,6 +25,7 @@ export const Blog = ({ blog, handleLike }) => {
           `Posted Comment on "${blog.title}" by ${blog.author}`,
           "success"
         );
+        setComment("");
       } else {
         showNotification(`Posting Comment failed`, "fail");
       }
@@ -39,7 +40,11 @@ export const Blog = ({ blog, handleLike }) => {
     <div>
       <h1>{blog.title}</h1>
       <p>{blog.url}</p>
-      <LikeButton handleLike={handleLike} blog={blog} />
+      <div className="flex gap-2">
+        <span className="likes">{blog.likes}</span>
+        <label>Likes</label>
+        <LikeButton handleLike={handleLike} blog={blog} />
+      </div>
       <p>added by {blog.author}</p>
       <hr />
       <h2>Comments</h2>
@@ -49,6 +54,7 @@ export const Blog = ({ blog, handleLike }) => {
           <input
             onChange={(e) => setComment(e.target.value)}
             type="text"
+            required
             minLength={3}
             name="comment"
             value={comment}

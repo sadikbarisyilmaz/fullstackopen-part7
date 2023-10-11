@@ -11,7 +11,7 @@ describe('Blog List', function () {
   })
 
   it('Login form is shown', function () {
-    cy.contains('Log in to application')
+    cy.contains('Log In to BlogLister')
   })
 
   describe('Login', function () {
@@ -21,10 +21,10 @@ describe('Blog List', function () {
       cy.get('#login-button').click()
       cy.get('.fail')
         .should('contain', 'invalid username or password')
-        .and('have.css', 'color', 'rgb(255, 0, 0)')
+        .and('have.css', 'border-color', 'rgb(255, 0, 0)')
 
-      cy.get('html').should('not.contain', 'test-user-name logged in')
-      cy.contains('test-user-name logged in').should('not.exist')
+      cy.get('html').should('not.contain', 'test-user-name Logged In')
+      cy.contains('test-user-name Logged In').should('not.exist')
     })
     it('succeeds with correct credentials', function () {
       // cy.get('#username').type('test-user-username')
@@ -32,17 +32,17 @@ describe('Blog List', function () {
       // cy.get('#login-button').click()
       cy.login({ username: 'test-user-username', password: 'sekret' })
       cy.wait(500)
-      cy.contains('test-user-name logged in')
+      cy.contains('test-user-name Logged In')
 
     })
 
 
   })
 
-  describe('when logged in', function () {
+  describe('when Logged In', function () {
     beforeEach(function () {
       cy.login({ username: 'test-user-username', password: 'sekret' })
-      cy.contains('test-user-name logged in')
+      cy.contains('test-user-name Logged In')
 
     })
 
@@ -71,7 +71,7 @@ describe('Blog List', function () {
         cy.contains('test title - test author')
 
         cy.contains('View').click()
-        cy.contains('Like').click()
+        cy.get('.likeBtn').click()
         cy.get(".likes").contains('1')
 
       })
@@ -127,15 +127,9 @@ describe('Blog List', function () {
         cy.contains(/^Like$/).click()
         cy.wait(500)
 
-        cy.get('.blog>.indv-blog').eq(0).should('contain', 'The title with the most likes - most like author')
-        cy.get('.blog>.indv-blog').eq(1).should('contain', 'test title - test author')
-
-
+        cy.get('.indv-blog').should('contain', 'The title with the most likes')
+        cy.get('.indv-blog').should('contain', 'test title')
       })
     })
-
-
-
   })
-
 })

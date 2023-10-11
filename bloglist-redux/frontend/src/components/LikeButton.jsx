@@ -14,8 +14,9 @@ export const LikeButton = ({ blog, handleLike }) => {
   const dispatch = useDispatch();
   return (
     <div>
-      <span className="likes"> {blog.likes} Likes </span>
-      <button onClick={() => handleLike(blog)}>Like</button>
+      <button className="likeBtn" onClick={() => handleLike(blog)}>
+        Like
+      </button>
     </div>
   );
 };
