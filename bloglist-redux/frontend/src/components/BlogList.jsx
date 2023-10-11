@@ -40,12 +40,11 @@ export const BlogList = ({
 
   return (
     <div className="indv-blog" style={blogStyle}>
-      <div>
-        <span className="title">
-          <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-        </span>
-        {" - "}
-        <span className="author">{blog.author}</span>
+      <div className="flex justify-between">
+        <p className="title">
+          <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>{" "}
+          <span className="author"> - {blog.author}</span>
+        </p>
         <button
           style={{ marginLeft: 5 }}
           onClick={() => (toggle ? setToggle(false) : setToggle(true))}
@@ -56,13 +55,16 @@ export const BlogList = ({
       {toggle && (
         <div>
           <div>
-            URL:
+            <label>Url: </label>
             <a href={blog.url} className="url" target="_blank">
               {blog.url}
             </a>
+            <LikeButton handleLike={handleLike} blog={blog} />
           </div>
-          <LikeButton handleLike={handleLike} blog={blog} />
-          <div>Created by: {blog.user.name}</div>
+          <div>
+            <label>Created by: </label>
+            <span>{blog.user.name}</span>
+          </div>
           {username === blog.user.username && (
             <button id="likeButton" onClick={handleDelete}>
               Remove

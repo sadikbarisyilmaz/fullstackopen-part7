@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { newNotification } from "../reducers/notificationReducer";
+import { loginUser } from "../reducers/userReducer";
 
 export const Nav = ({ loggedUser }) => {
   const dispatch = useDispatch();
@@ -17,12 +18,26 @@ export const Nav = ({ loggedUser }) => {
   };
 
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/users">Users</Link>
-      {loggedUser && loggedUser.name} logged in{" "}
-      <button onClick={logout}>Logout</button>
-      <hr />
+    <div className="flex justify-between md:px-10 p-4 border-b ">
+      <div className="flex justify-center items-center">
+        <h1 className="text-xl font-semibold  h-max align-middle">
+          BlogLister
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <div className="flex justify-center items-center gap-2">
+          <Link to="/">Blogs</Link>
+          <Link to="/users">Users</Link>
+        </div>
+        {loggedUser ? (
+          <div className="grid">
+            <div>{loggedUser.name} Logged In</div>
+            <button onClick={logout}>Logout</button>
+          </div>
+        ) : (
+          "Login"
+        )}
+      </div>
     </div>
   );
 };

@@ -60,30 +60,34 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Nav loggedUser={loggedUser} />
-      {notif && <Notification />}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              showNotification={showNotification}
-              blogs={blogs}
-              loggedUser={loggedUser}
-              initializeBlogs={initializeBlogs}
-              handleLike={handleLike}
+    <div className="h-screen ">
+      <div className=" grid items-center relative">
+        <Nav loggedUser={loggedUser} />
+        {notif && <Notification />}
+        <div className="grid p-20 ">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  showNotification={showNotification}
+                  blogs={blogs}
+                  loggedUser={loggedUser}
+                  initializeBlogs={initializeBlogs}
+                  handleLike={handleLike}
+                />
+              }
             />
-          }
-        />
-        <Route path="/users" element={<Users users={users} />} />
-        <Route path="/users/:id" element={<User user={user} />} />
-        <Route
-          path="/blogs/:id"
-          element={<Blog handleLike={handleLike} blog={blog} />}
-        />
-      </Routes>
-      <Footer />
+            <Route path="/users" element={<Users users={users} />} />
+            <Route path="/users/:id" element={<User user={user} />} />
+            <Route
+              path="/blogs/:id"
+              element={<Blog handleLike={handleLike} blog={blog} />}
+            />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 };

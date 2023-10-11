@@ -1,7 +1,7 @@
 export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
   return (
     <>
-      <h1>Log in to application</h1>
+      <h1>Log In to BlogLister</h1>
       <form onSubmit={handleLogin}>
         <div>
           Username

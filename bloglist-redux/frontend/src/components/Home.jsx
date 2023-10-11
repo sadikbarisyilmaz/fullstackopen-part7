@@ -63,7 +63,6 @@ export const Home = ({
   return (
     <div>
       <div>
-        <h1>BlogLister</h1>
         {loggedUser && (
           <>
             {!showBlogForm && (
