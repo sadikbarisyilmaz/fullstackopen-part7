@@ -12,15 +12,15 @@ export const Notification = () => {
         className={`${notif[1]} w-fit p-2 px-6 animate-bounce rounded-2xl bg-white flex gap-2`}
       >
         {notif[1] === "success" ? (
-          <div className="flex items-center text-lime-500 text-2xl ">
+          <div className="flex items-center text-lime-500 text-xl ">
             <AiFillCheckCircle />
           </div>
         ) : notif[1] === "fail" ? (
-          <div className="flex items-center text-red-600 text-2xl">
+          <div className="flex items-center text-red-600 text-xl">
             <GoAlertFill />
           </div>
         ) : null}
-        <p className="p-2">{notif[0]}</p>
+        <p className="p-2 text-sm">{notif[0]}</p>
       </div>
     </div>
   );

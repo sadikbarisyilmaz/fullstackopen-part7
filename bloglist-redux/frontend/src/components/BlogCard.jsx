@@ -5,20 +5,14 @@ import { removeBlogs } from "../reducers/blogsReducer";
 import { Link } from "react-router-dom";
 import { LikeButton } from "./LikeButton";
 
-export const BlogList = ({
+export const BlogCard = ({
   blog,
   token,
   username,
-  handleLike, //for tests ?
+  handleLike, //for tests
   showNotification,
 }) => {
   const [toggle, setToggle] = useState(false);
-  const blogStyle = {
-    padding: 10,
-    border: "solid",
-    borderWidth: 1,
-    marginBottom: 5,
-  };
   const dispatch = useDispatch();
   const handleDelete = async () => {
     if (window.confirm(`Remove blog "${blog.title}" by ${blog.author}`)) {
@@ -39,7 +33,7 @@ export const BlogList = ({
   };
 
   return (
-    <div style={blogStyle}>
+    <div className="p-4 border rounded-2xl">
       <div className="flex justify-between">
         <p className="title">
           <Link to={`/blogs/${blog.id}`}>

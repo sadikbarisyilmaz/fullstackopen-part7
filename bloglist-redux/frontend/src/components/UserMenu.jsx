@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 export const UserMenu = ({ loggedUser, logout }) => {
   const [hidden, setHidden] = useState(true);
   useEffect(() => {
-    // setHidden(false);
     console.log("mounted", hidden);
   }, []);
 

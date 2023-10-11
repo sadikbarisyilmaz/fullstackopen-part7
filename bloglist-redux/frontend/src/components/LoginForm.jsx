@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
   return (
     <>
@@ -39,6 +41,10 @@ export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
         <button id="login-button" type="submit">
           Login
         </button>
+
+        <div>
+          Don't Have an Account ? <Link to="/signup">Sign Up</Link>
+        </div>
       </form>
     </>
   );

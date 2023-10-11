@@ -1,7 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { initializeUsers } from "../reducers/usersReducer";
-import { useEffect } from "react";
-import { Routes, Route, Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Users = ({ users }) => {
   return (

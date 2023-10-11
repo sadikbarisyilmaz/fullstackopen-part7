@@ -3,15 +3,9 @@
 @tailwind utilities;
 
 .success {
-  /* color: rgb(13, 110, 0); */
-  /* background: rgb(193, 252, 179); */
-  border: 2px solid rgb(132 204 22);
-  /* font-size: 20px; */
+  border: 1px solid rgb(132 204 22);
 }
 
 .fail {
-  /* color: red; */
-  /* background: rgb(248, 186, 186); */
-  border: 2px solid red;
-  /* font-size: 20px; */
+  border: 1px solid red;
 }

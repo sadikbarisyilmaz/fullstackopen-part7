@@ -2,7 +2,7 @@ import { Routes, Route, useMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeBlogs } from "./reducers/blogsReducer";
 import { initializeUsers } from "./reducers/usersReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Home } from "./components/Home";
 import { Users } from "./components/Users";
 import { Nav } from "./components/Nav";
@@ -14,6 +14,11 @@ import { Notification } from "./components/Notification";
 import { updateBlog } from "./services/blogs";
 import { newNotification } from "./reducers/notificationReducer";
 import { likeBlog } from "./reducers/blogsReducer";
+import { LoginForm } from "./components/LoginForm";
+import { login } from "./services/login";
+import { SignupForm } from "./components/SignupForm";
+import { Blogs } from "./components/Blogs";
+import { BlogCard } from "./components/BlogCard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +30,10 @@ const App = () => {
       dispatch(loginUser(JSON.parse(loggedUser)));
     }
   }, []);
+  const [loginFormData, setLoginFormData] = useState({
+    username: "",
+    password: "",
+  });
 
   const users = useSelector((state) => state.users);
   const blogs = useSelector((state) => state.blogs);
@@ -52,6 +61,25 @@ const App = () => {
     dispatch(likeBlog(likedBlog));
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    login(loginFormData).then((e) => {
+      if (e.status === 200) {
+        showNotification("Login Successfull", "success");
+        const cridentials = e.data;
+        dispatch(loginUser(cridentials));
+        window.localStorage.setItem("loggedUser", JSON.stringify(cridentials));
+        setLoginFormData({
+          username: "",
+          password: "",
+        });
+        //add router to blogs
+      } else {
+        showNotification("invalid username or password", "fail");
+      }
+    });
+  };
+
   const showNotification = async (msg, type) => {
     dispatch(newNotification([msg, type]));
     setTimeout(() => {
@@ -62,23 +90,34 @@ const App = () => {
   return (
     <div className="h-screen ">
       <div className=" grid items-center relative">
-        <Nav loggedUser={loggedUser} />
+        <Nav initializeBlogs={initializeBlogs} loggedUser={loggedUser} />
         {notif && <Notification />}
         <div className="grid p-20 ">
           <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/users" element={<Users users={users} />} />
             <Route
-              path="/"
+              path="/blogs"
               element={
-                <Home
-                  showNotification={showNotification}
-                  blogs={blogs}
+                <Blogs
                   loggedUser={loggedUser}
-                  initializeBlogs={initializeBlogs}
+                  blogs={blogs}
                   handleLike={handleLike}
+                  showNotification={showNotification}
                 />
               }
             />
-            <Route path="/users" element={<Users users={users} />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route
+              path="/login"
+              element={
+                <LoginForm
+                  loginFormData={loginFormData}
+                  handleLogin={handleLogin}
+                  setLoginFormData={setLoginFormData}
+                />
+              }
+            />
             <Route path="/users/:id" element={<User user={user} />} />
             <Route
               path="/blogs/:id"

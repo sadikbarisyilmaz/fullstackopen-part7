@@ -4,12 +4,33 @@ import { newNotification } from "../reducers/notificationReducer";
 import { loginUser } from "../reducers/userReducer";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useState } from "react";
-import { UserMenu } from "./UserMenu";
+import { BlogForm } from "./BlogForm";
 
-export const Nav = ({ loggedUser }) => {
+export const Nav = ({ loggedUser, initializeBlogs }) => {
   const [toggle, setToggle] = useState(false);
-
+  const [showBlogForm, setShowBlogForm] = useState(false);
   const dispatch = useDispatch();
+
+  const handleSubmit = async (blogForm, setBlogForm) => {
+    const response = await createBlog(blogForm, loggedUser.token);
+    if (response.status === 201) {
+      dispatch(initializeBlogs());
+      showNotification(
+        `A new blog "${blogForm.title}" by "${blogForm.author}" added`,
+        "success"
+      );
+      setBlogForm({
+        title: "",
+        author: "",
+        url: "",
+      });
+      setShowBlogForm(false);
+      return blogForm;
+    } else {
+      showNotification(response.data.error, "fail");
+    }
+  };
+
   const showNotification = async (msg, type) => {
     dispatch(newNotification([msg, type]));
     setTimeout(() => {
@@ -27,15 +48,14 @@ export const Nav = ({ loggedUser }) => {
     <div className="flex justify-between md:px-10 p-4 border-b ">
       <div className="flex justify-center items-center">
         <h1 className="text-xl font-semibold  h-max align-middle">
-          BlogLister
+          <Link to="/">BlogLister</Link>
         </h1>
       </div>
       <div className="flex gap-4">
         <div className="flex justify-center items-center gap-2">
-          <Link to="/">Blogs</Link>
+          <Link to="/blogs">Blogs</Link>
           <Link to="/users">Users</Link>
-          <Link to="/new">Nev Blog</Link>
-          {!loggedUser && <Link to="/Login">Loğin</Link>}
+          {!loggedUser && <Link to="/Login">Login</Link>}
         </div>
         {loggedUser ? (
           <div
@@ -50,32 +70,42 @@ export const Nav = ({ loggedUser }) => {
           >
             <span className="relative">
               <BsFillPersonFill />
-              {toggle && (
-                // <UserMenu loggedUser={loggedUser} logout={logout} />
-                <></>
-              )}
+              <div
+                className={`fixed h-fit right-2 text-sm top-12 bg-white rounded-2xl p-3 border z-50 ${
+                  toggle
+                    ? "animate-fadeIn opacity-100"
+                    : "animate-fadeOut opacity-0"
+                }`}
+              >
+                <div className="grid gap-2 justify-center">
+                  {loggedUser ? (
+                    <>
+                      {loggedUser.name} Logged In <br />
+                      <button
+                        className=" z-50"
+                        onClick={() => setShowBlogForm(true)}
+                      >
+                        New Blog
+                      </button>
+                      {toggle && <button onClick={logout}>Logout</button>}
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </span>
           </div>
         ) : (
           ""
         )}
       </div>
-      <div
-        className={`fixed h-fit right-2 text-sm top-12 bg-white rounded-2xl p-3 border z-50 ${
-          toggle ? "animate-fadeIn opacity-100" : "animate-fadeOut opacity-0"
-        }`}
-      >
-        <div className="grid gap-2 justify-center">
-          {loggedUser ? (
-            <>
-              {loggedUser.name} Logged In <br />
-              {toggle && <button onClick={logout}>Logout</button>}
-            </>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
+      {showBlogForm && (
+        <BlogForm
+          setShowBlogForm={setShowBlogForm}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 };
