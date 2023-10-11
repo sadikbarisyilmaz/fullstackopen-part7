@@ -66,7 +66,9 @@ export const Home = ({
         {loggedUser && (
           <>
             {!showBlogForm && (
-              <button onClick={() => setShowBlogForm(true)}>New Blog</button>
+              <button className=" z-50" onClick={() => setShowBlogForm(true)}>
+                New Blog
+              </button>
             )}
             {showBlogForm && (
               <>

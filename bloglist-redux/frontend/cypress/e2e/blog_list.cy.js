@@ -32,6 +32,7 @@ describe('Blog List', function () {
       // cy.get('#login-button').click()
       cy.login({ username: 'test-user-username', password: 'sekret' })
       cy.wait(500)
+      cy.get('.toggle').click()
       cy.contains('test-user-name Logged In')
 
     })
@@ -42,6 +43,7 @@ describe('Blog List', function () {
   describe('when Logged In', function () {
     beforeEach(function () {
       cy.login({ username: 'test-user-username', password: 'sekret' })
+      cy.get('.toggle').click()
       cy.contains('test-user-name Logged In')
 
     })
@@ -85,7 +87,7 @@ describe('Blog List', function () {
       })
 
       it(' only the creator can see the delete button of a blog, not anyone else', function () {
-
+        cy.get('.toggle').click()
         cy.contains('Logout').click()
 
         const user = {
