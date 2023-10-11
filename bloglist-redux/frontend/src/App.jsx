@@ -51,15 +51,17 @@ const App = () => {
     });
     dispatch(likeBlog(likedBlog));
   };
+
   const showNotification = async (msg, type) => {
     dispatch(newNotification([msg, type]));
     setTimeout(() => {
       dispatch(newNotification([]));
     }, 5000);
   };
+
   return (
     <div>
-      <Nav user={loggedUser} />
+      <Nav loggedUser={loggedUser} />
       {notif && <Notification />}
       <Routes>
         <Route
@@ -68,7 +70,7 @@ const App = () => {
             <Home
               showNotification={showNotification}
               blogs={blogs}
-              user={loggedUser}
+              loggedUser={loggedUser}
               initializeBlogs={initializeBlogs}
               handleLike={handleLike}
             />

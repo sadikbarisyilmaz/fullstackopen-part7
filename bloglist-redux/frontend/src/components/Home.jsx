@@ -10,7 +10,7 @@ import { loginUser } from "../reducers/userReducer";
 export const Home = ({
   blogs,
   initializeBlogs,
-  user,
+  loggedUser,
   handleLike,
   showNotification,
 }) => {
@@ -41,7 +41,7 @@ export const Home = ({
   };
 
   const handleSubmit = async (blogForm, setBlogForm) => {
-    const response = await createBlog(blogForm, user.token);
+    const response = await createBlog(blogForm, loggedUser.token);
     if (response.status === 201) {
       dispatch(initializeBlogs());
       showNotification(
@@ -64,7 +64,7 @@ export const Home = ({
     <div>
       <div>
         <h1>BlogLister</h1>
-        {user && (
+        {loggedUser && (
           <>
             {!showBlogForm && (
               <button onClick={() => setShowBlogForm(true)}>New Blog</button>
@@ -91,8 +91,8 @@ export const Home = ({
                   <BlogList
                     key={blog.id}
                     blog={blog}
-                    token={user.token}
-                    username={user.username}
+                    token={loggedUser.token}
+                    username={loggedUser.username}
                     handleLike={handleLike}
                     showNotification={showNotification}
                   />
@@ -102,7 +102,7 @@ export const Home = ({
         )}
         <br />
 
-        {!user && (
+        {!loggedUser && (
           <>
             <LoginForm
               handleLogin={handleLogin}

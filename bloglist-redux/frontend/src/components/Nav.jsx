@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { newNotification } from "../reducers/notificationReducer";
 
-export const Nav = ({ user }) => {
+export const Nav = ({ loggedUser }) => {
   const dispatch = useDispatch();
   const showNotification = async (msg, type) => {
     dispatch(newNotification([msg, type]));
@@ -20,7 +20,8 @@ export const Nav = ({ user }) => {
     <div>
       <Link to="/">Home</Link>
       <Link to="/users">Users</Link>
-      {user && user.name} logged in <button onClick={logout}>Logout</button>
+      {loggedUser && loggedUser.name} logged in{" "}
+      <button onClick={logout}>Logout</button>
       <hr />
     </div>
   );
