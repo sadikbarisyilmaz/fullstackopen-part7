@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeBlogs } from "./reducers/blogsReducer";
 import { initializeUsers } from "./reducers/usersReducer";
 import { useEffect } from "react";
-import Home from "./components/Home";
+import { Home } from "./components/Home";
 import { Users } from "./components/Users";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
@@ -11,6 +11,9 @@ import { User } from "./components/uSER.JSX";
 import { loginUser } from "./reducers/userReducer";
 import { Blog } from "./components/Blog";
 import { Notification } from "./components/Notification";
+import { updateBlog } from "./services/blogs";
+import { newNotification } from "./reducers/notificationReducer";
+import { likeBlog } from "./reducers/blogsReducer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +40,23 @@ const App = () => {
     ? blogs.find((blog) => blog.id === matchBlog.params.id)
     : null;
 
+  const handleLike = async (blog) => {
+    const likedBlog = { ...blog, likes: blog.likes + 1 };
+    updateBlog(likedBlog, blog.id).then((e) => {
+      if (e.status === 201) {
+        showNotification(`Liked "${blog.title}" by ${blog.author}`, "success");
+      } else {
+        showNotification(`Like failed`, "fail");
+      }
+    });
+    dispatch(likeBlog(likedBlog));
+  };
+  const showNotification = async (msg, type) => {
+    dispatch(newNotification([msg, type]));
+    setTimeout(() => {
+      dispatch(newNotification([]));
+    }, 5000);
+  };
   return (
     <div>
       <Nav user={loggedUser} />
@@ -46,15 +66,20 @@ const App = () => {
           path="/"
           element={
             <Home
+              showNotification={showNotification}
               blogs={blogs}
               user={loggedUser}
               initializeBlogs={initializeBlogs}
+              handleLike={handleLike}
             />
           }
         />
         <Route path="/users" element={<Users users={users} />} />
         <Route path="/users/:id" element={<User user={user} />} />
-        <Route path="/blogs/:id" element={<Blog blog={blog} />} />
+        <Route
+          path="/blogs/:id"
+          element={<Blog handleLike={handleLike} blog={blog} />}
+        />
       </Routes>
       <Footer />
     </div>

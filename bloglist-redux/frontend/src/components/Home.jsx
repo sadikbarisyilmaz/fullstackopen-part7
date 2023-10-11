@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { BlogList } from "./BlogList";
-import { createBlog, updateBlog } from "../services/blogs";
+import { createBlog } from "../services/blogs";
 import { login } from "../services/login";
 import { LoginForm } from "./LoginForm";
 import { BlogForm } from "./BlogForm";
-import { useDispatch, useSelector } from "react-redux";
-import { newNotification } from "../reducers/notificationReducer";
-import { likeBlog } from "../reducers/blogsReducer";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../reducers/userReducer";
 
-const Home = ({ blogs, initializeBlogs, user }) => {
+export const Home = ({
+  blogs,
+  initializeBlogs,
+  user,
+  handleLike,
+  showNotification,
+}) => {
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [loginFormData, setLoginFormData] = useState({
     username: "",
@@ -17,26 +21,6 @@ const Home = ({ blogs, initializeBlogs, user }) => {
   });
 
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
-
-  const handleLike = async (blog, token) => {
-    const likedBlog = { ...blog, likes: blog.likes + 1 };
-    updateBlog(likedBlog, token, blog.id).then((e) => {
-      if (e.status === 201) {
-        showNotification(`Liked "${blog.title}" by ${blog.author}`, "success");
-      } else {
-        showNotification(`Like failed`, "fail");
-      }
-    });
-    dispatch(likeBlog(likedBlog));
-  };
-
-  const showNotification = async (msg, type) => {
-    dispatch(newNotification([msg, type]));
-    setTimeout(() => {
-      dispatch(newNotification([]));
-    }, 5000);
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -55,12 +39,6 @@ const Home = ({ blogs, initializeBlogs, user }) => {
       }
     });
   };
-
-  // const logout = () => {
-  //   dispatch(loginUser(null));
-  //   window.localStorage.removeItem("loggedUser");
-  //   showNotification("Logout Successful", "success");
-  // };
 
   const handleSubmit = async (blogForm, setBlogForm) => {
     const response = await createBlog(blogForm, user.token);
@@ -88,11 +66,6 @@ const Home = ({ blogs, initializeBlogs, user }) => {
         <h1>BlogLister</h1>
         {user && (
           <>
-            {/* <h2>
-              {user && user.name} logged in{" "}
-              <button onClick={logout}>Logout</button>
-            </h2> */}
-
             {!showBlogForm && (
               <button onClick={() => setShowBlogForm(true)}>New Blog</button>
             )}
@@ -142,5 +115,3 @@ const Home = ({ blogs, initializeBlogs, user }) => {
     </div>
   );
 };
-
-export default Home;

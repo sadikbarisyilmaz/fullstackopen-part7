@@ -44,7 +44,8 @@ export const BlogList = ({
         <span className="title">
           <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
         </span>
-        ,<span className="author">{blog.author}</span>
+        {" - "}
+        <span className="author">{blog.author}</span>
         <button
           style={{ marginLeft: 5 }}
           onClick={() => (toggle ? setToggle(false) : setToggle(true))}
@@ -60,7 +61,7 @@ export const BlogList = ({
               {blog.url}
             </a>
           </div>
-          <LikeButton blog={blog} />
+          <LikeButton handleLike={handleLike} blog={blog} />
           <div>Created by: {blog.user.name}</div>
           {username === blog.user.username && (
             <button id="likeButton" onClick={handleDelete}>

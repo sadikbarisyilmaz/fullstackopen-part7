@@ -4,6 +4,7 @@ import { BlogList } from '../components/BlogList'
 import userEvent from '@testing-library/user-event'
 import { Provider } from "react-redux";
 import store from '../store';
+import { BrowserRouter as Router } from "react-router-dom";
 
 const blog =
 {
@@ -16,8 +17,10 @@ const blog =
 
 test("renders the blogs title and author, but does not render its URL or number of likes by default", () => {
     const { container } = render(
-        < Provider store={store} >
-            <BlogList blog={blog} />
+        <Provider store={store}>
+            <Router>
+                <BlogList blog={blog} />
+            </Router>
         </Provider >
     )
     const title = container.querySelector('.title')
@@ -39,7 +42,9 @@ test('blogs URL and number of likes are shown when the button controlling the sh
 
     const { container } = render(
         <Provider store={store}>
-            <BlogList blog={blog} view={mockHandler} />
+            <Router>
+                <BlogList blog={blog} view={mockHandler} />
+            </Router>
         </Provider>
     )
 
@@ -62,7 +67,9 @@ test('if the like button is clicked twice, the event handler the component recei
 
     render(
         <Provider store={store}>
-            <BlogList blog={blog} handleLike={mockHandler} />
+            <Router>
+                <BlogList blog={blog} handleLike={mockHandler} />
+            </Router>
         </Provider>
     )
 

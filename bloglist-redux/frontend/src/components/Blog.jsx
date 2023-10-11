@@ -5,7 +5,7 @@ import { commentBlog } from "../reducers/blogsReducer";
 import { useState } from "react";
 import { newNotification } from "../reducers/notificationReducer";
 
-export const Blog = ({ blog }) => {
+export const Blog = ({ blog, handleLike }) => {
   const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export const Blog = ({ blog }) => {
     <div>
       <h1>{blog.title}</h1>
       <p>{blog.url}</p>
-      <LikeButton blog={blog} />
+      <LikeButton handleLike={handleLike} blog={blog} />
       <p>added by {blog.author}</p>
       <hr />
       <h2>Comments</h2>

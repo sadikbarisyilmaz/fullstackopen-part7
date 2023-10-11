@@ -3,19 +3,7 @@ import { likeBlog } from "../reducers/blogsReducer";
 import { updateBlog } from "../services/blogs";
 import { useDispatch, useSelector } from "react-redux";
 
-export const LikeButton = ({ blog }) => {
-  const handleLike = async (blog, token) => {
-    const likedBlog = { ...blog, likes: blog.likes + 1 };
-    updateBlog(likedBlog, token, blog.id).then((e) => {
-      if (e.status === 201) {
-        showNotification(`Liked "${blog.title}" by ${blog.author}`, "success");
-      } else {
-        showNotification(`Like failed`, "fail");
-      }
-    });
-    dispatch(likeBlog(likedBlog));
-  };
-
+export const LikeButton = ({ blog, handleLike }) => {
   const showNotification = async (msg, type) => {
     dispatch(newNotification([msg, type]));
     setTimeout(() => {
@@ -24,11 +12,10 @@ export const LikeButton = ({ blog }) => {
   };
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   return (
     <div>
       <span className="likes"> {blog.likes} Likes </span>
-      <button onClick={() => handleLike(blog, user.token)}>Like</button>
+      <button onClick={() => handleLike(blog)}>Like</button>
     </div>
   );
 };
