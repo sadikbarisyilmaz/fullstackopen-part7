@@ -35,7 +35,7 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
     dispatch(newNotification([msg, type]));
     setTimeout(() => {
       dispatch(newNotification([]));
-    }, 5000);
+    }, 2000);
   };
 
   const logout = () => {
@@ -82,7 +82,7 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                     <>
                       {loggedUser.name} Logged In <br />
                       <button
-                        className=" z-50"
+                        className=" z-40"
                         onClick={() => setShowBlogForm(true)}
                       >
                         New Blog

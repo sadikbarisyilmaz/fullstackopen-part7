@@ -20,7 +20,7 @@ export default {
         },
         fadeOut: {
           '0%': { opacity: 1 },
-          '100%': { opacity: 0 },
+          '60%': { opacity: 0 },
         },
       }),
     },
