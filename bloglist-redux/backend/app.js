@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 app.use('/api/blogs', userExtractor, blogsRouter)
 app.use('/api/users', usersRouter)
-app.use('/login', loginRouter)
+app.use('/api/login', loginRouter)
 
 app.use(unknownEndpoint)
 app.use(errorHandler)
