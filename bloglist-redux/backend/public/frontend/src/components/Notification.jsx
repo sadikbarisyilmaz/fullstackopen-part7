@@ -7,9 +7,9 @@ export const Notification = () => {
   const notif = useSelector((state) => state.notification);
 
   return (
-    <div className="fixed -z-10 top-24 w-full flex justify-center">
+    <div className="fixed -z-10 top-24 w-full flex justify-center ">
       <div
-        className={`${notif[1]} w-fit p-2 px-6 animate-bounce rounded-2xl bg-white flex gap-2`}
+        className={`${notif[1]} w-fit  px-6 animate-bounce rounded-lg bg-white flex gap-2`}
       >
         {notif[1] === "success" ? (
           <div className="flex items-center text-lime-500 text-xl ">

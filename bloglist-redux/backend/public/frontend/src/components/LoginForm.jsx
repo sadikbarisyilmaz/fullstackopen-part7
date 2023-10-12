@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
   return (
-    <>
+    <div className="animate-fadeIn">
       <h1>Log In to BlogLister</h1>
       <form onSubmit={handleLogin}>
         <div>
@@ -46,6 +46,6 @@ export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
           Don't Have an Account ? <Link to="/signup">Sign Up</Link>
         </div>
       </form>
-    </>
+    </div>
   );
 };

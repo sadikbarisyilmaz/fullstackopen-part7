@@ -4,7 +4,7 @@ export const User = ({ user }) => {
   }
 
   return (
-    <div>
+    <div className="animate-fadeIn">
       <h1>{user.name}</h1>
       <h2>added blogs</h2>
       <ul>

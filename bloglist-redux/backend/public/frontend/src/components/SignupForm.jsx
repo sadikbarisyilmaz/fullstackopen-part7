@@ -1,3 +1,3 @@
 export const SignupForm = () => {
-  return <div>SignupForm</div>;
+  return <div className="animate-fadeIn">SignupForm</div>;
 };

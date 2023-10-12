@@ -4,6 +4,8 @@ import { deleteBlog } from "../services/blogs";
 import { removeBlogs } from "../reducers/blogsReducer";
 import { Link } from "react-router-dom";
 import { LikeButton } from "./LikeButton";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
 export const BlogCard = ({
   blog,
@@ -33,7 +35,7 @@ export const BlogCard = ({
   };
 
   return (
-    <div className="p-4 border rounded-2xl">
+    <div className="p-4 border transition ease-in-out delay-150 rounded-lg shadow-md">
       <div className="flex justify-between">
         <p className="title">
           <Link to={`/blogs/${blog.id}`}>
@@ -45,33 +47,54 @@ export const BlogCard = ({
           style={{ marginLeft: 5 }}
           onClick={() => (toggle ? setToggle(false) : setToggle(true))}
         >
-          {toggle ? "Hide" : "View"}
+          {toggle ? (
+            <>
+              <div className="flex gap-1  items-center">
+                <span>Hide</span>
+                <span className="mt-[1px]">
+                  <IoIosArrowUp />
+                </span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex gap-1 items-center">
+                <span>View</span>
+                <span className="mt-[1px]">
+                  <IoIosArrowDown />
+                </span>
+              </div>
+            </>
+          )}
         </button>
       </div>
-      {toggle && (
+
+      <div
+        className={`${
+          toggle ? " h-24" : "h-0"
+        } transition-all duration-300 overflow-hidden w-full`}
+      >
         <div>
-          <div>
-            <label>Url: </label>
-            <a href={blog.url} className="url" target="_blank">
-              {blog.url}
-            </a>
-            <div className="flex gap-2">
-              <label>Likes: </label>
-              <span className="likes">{blog.likes}</span>
-              <LikeButton handleLike={handleLike} blog={blog} />
-            </div>
+          <label>Url: </label>
+          <a href={blog.url} className="url" target="_blank">
+            {blog.url}
+          </a>
+          <div className="flex gap-2">
+            <label>Likes: </label>
+            <span className="likes">{blog.likes}</span>
+            <LikeButton handleLike={handleLike} blog={blog} />
           </div>
-          <div>
-            <label>Created by: </label>
-            <span>{blog.user.name}</span>
-          </div>
-          {username === blog.user.username && (
-            <button id="likeButton" onClick={handleDelete}>
-              Remove
-            </button>
-          )}
         </div>
-      )}
+        <div>
+          <label>Created by: </label>
+          <span>{blog.user.name}</span>
+        </div>
+        {username === blog.user.username && (
+          <button id="likeButton" onClick={handleDelete}>
+            Remove
+          </button>
+        )}
+      </div>
     </div>
   );
 };

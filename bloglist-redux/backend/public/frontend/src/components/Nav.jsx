@@ -39,13 +39,14 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
   };
 
   const logout = () => {
+    console.log("logout");
     dispatch(loginUser(null));
     window.localStorage.removeItem("loggedUser");
     showNotification("Logout Successful", "success");
   };
 
   return (
-    <div className="flex justify-between md:px-10 p-4 border-b ">
+    <div className="flex justify-between md:px-10 p-4  shadow-md">
       <div className="flex justify-center items-center">
         <h1 className="text-xl font-semibold  h-max align-middle">
           <Link to="/">BlogLister</Link>
@@ -58,20 +59,24 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
           {!loggedUser && <Link to="/Login">Login</Link>}
         </div>
         {loggedUser ? (
-          <div
-            tabIndex={0}
-            onBlur={() =>
-              setTimeout(() => {
-                setToggle(false);
-              }, 100)
-            }
-            onFocus={() => setToggle(true)}
-            className="flex items-center text-xl border border-gray-500 text-gray-500 rounded-full p-1 toggle cursor-pointer"
-          >
-            <span className="relative">
-              <BsFillPersonFill />
+          <>
+            <div
+              tabIndex={0}
+              onBlur={() =>
+                setTimeout(() => {
+                  setToggle(false);
+                }, 100)
+              }
+              onFocus={() => setToggle(true)}
+              className="flex items-center text-xl border border-gray-500 text-gray-500 rounded-full p-1 toggle cursor-pointer"
+            >
+              <span className="relative">
+                <BsFillPersonFill />
+              </span>
+            </div>
+            {
               <div
-                className={`fixed h-fit right-2 text-sm top-12 bg-white rounded-2xl p-3 border z-50 ${
+                className={`fixed shadow-md h-fit right-2 text-sm top-12 bg-white rounded-lg p-3 border z-50 ${
                   toggle
                     ? "animate-fadeIn opacity-100"
                     : "animate-fadeOut opacity-0"
@@ -80,22 +85,26 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                 <div className="grid gap-2 justify-center">
                   {loggedUser ? (
                     <>
-                      {loggedUser.name} Logged In <br />
-                      <button
-                        className=" z-40"
-                        onClick={() => setShowBlogForm(true)}
-                      >
-                        New Blog
-                      </button>
-                      {toggle && <button onClick={logout}>Logout</button>}
+                      {toggle && (
+                        <>
+                          {loggedUser.name} Logged In <br />
+                          <button
+                            className=" z-40"
+                            onClick={() => setShowBlogForm(true)}
+                          >
+                            New Blog
+                          </button>
+                          <button onClick={logout}>Logout</button>{" "}
+                        </>
+                      )}
                     </>
                   ) : (
                     ""
                   )}
                 </div>
               </div>
-            </span>
-          </div>
+            }
+          </>
         ) : (
           ""
         )}

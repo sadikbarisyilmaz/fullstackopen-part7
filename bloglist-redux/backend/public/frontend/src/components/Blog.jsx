@@ -37,7 +37,7 @@ export const Blog = ({ blog, handleLike }) => {
     return null;
   }
   return (
-    <div>
+    <div className="animate-fadeIn">
       <h1>{blog.title}</h1>
       <p>{blog.url}</p>
       <div className="flex gap-2">

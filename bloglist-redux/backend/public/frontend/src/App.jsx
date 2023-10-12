@@ -19,6 +19,7 @@ import { login } from "./services/login";
 import { SignupForm } from "./components/SignupForm";
 import { Blogs } from "./components/Blogs";
 import { BlogCard } from "./components/BlogCard";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const App = () => {
   const blog = matchBlog
     ? blogs.find((blog) => blog.id === matchBlog.params.id)
     : null;
+  const navigate = useNavigate();
 
   const handleLike = async (blog) => {
     const likedBlog = { ...blog, likes: blog.likes + 1 };
@@ -73,7 +75,7 @@ const App = () => {
           username: "",
           password: "",
         });
-        //add router to blogs
+        navigate("/blogs");
       } else {
         showNotification("invalid username or password", "fail");
       }
@@ -84,7 +86,7 @@ const App = () => {
     dispatch(newNotification([msg, type]));
     setTimeout(() => {
       dispatch(newNotification([]));
-    }, 5000);
+    }, 2000);
   };
 
   return (
@@ -95,7 +97,16 @@ const App = () => {
         <div className="grid p-20 ">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/users" element={<Users users={users} />} />
+            <Route
+              path="/users"
+              element={
+                <Users
+                  loggedUser={loggedUser}
+                  showNotification={showNotification}
+                  users={users}
+                />
+              }
+            />
             <Route
               path="/blogs"
               element={
