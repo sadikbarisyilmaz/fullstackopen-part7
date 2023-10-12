@@ -17,9 +17,13 @@ connect(MONGODB_URI).then(() => {
 }).catch((err) => {
     errorlogger(err);
 })
-
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200
+}
 export const app = express()
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(json())
 app.use(requestLogger)
 app.use(tokenExtractor)
