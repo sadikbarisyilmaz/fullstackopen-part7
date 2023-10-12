@@ -7,7 +7,7 @@ import { Home } from "./components/Home";
 import { Users } from "./components/Users";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
-import { User } from "./components/User.JSX";
+import { User } from "./components/User.jsx";
 import { loginUser } from "./reducers/userReducer";
 import { Blog } from "./components/Blog";
 import { Notification } from "./components/Notification";
