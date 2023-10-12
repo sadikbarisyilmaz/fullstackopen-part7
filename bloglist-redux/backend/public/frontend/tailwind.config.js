@@ -5,13 +5,11 @@ export default {
   ],
   theme: {
     extend: {
-
       // that is animation class
       animation: {
         fadeIn: 'fadeIn 0.15s ',
         fadeOut: 'fadeOut 0.15s ',
       },
-
       // that is actual animation
       keyframes: theme => ({
         fadeIn: {

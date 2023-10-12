@@ -1,7 +1,6 @@
 import { Routes, Route, useMatch } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { initializeBlogs } from "./reducers/blogsReducer";
-import { initializeUsers } from "./reducers/usersReducer";
 import { useEffect, useState } from "react";
 import { Home } from "./components/Home";
 import { Users } from "./components/Users";
@@ -18,11 +17,14 @@ import { LoginForm } from "./components/LoginForm";
 import { login } from "./services/login";
 import { SignupForm } from "./components/SignupForm";
 import { Blogs } from "./components/Blogs";
-import { BlogCard } from "./components/BlogCard";
-import { useNavigate } from "react-router-dom";
+import { initializeBlogs } from "./reducers/blogsReducer";
+import { initializeUsers } from "./reducers/usersReducer";
 
 const App = () => {
-  const dispatch = useDispatch();
+  const [loginFormData, setLoginFormData] = useState({
+    username: "",
+    password: "",
+  });
   useEffect(() => {
     dispatch(initializeUsers());
     dispatch(initializeBlogs());
@@ -31,11 +33,8 @@ const App = () => {
       dispatch(loginUser(JSON.parse(loggedUser)));
     }
   }, []);
-  const [loginFormData, setLoginFormData] = useState({
-    username: "",
-    password: "",
-  });
 
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   const blogs = useSelector((state) => state.blogs);
   const notif = useSelector((state) => state.notification);
@@ -90,52 +89,55 @@ const App = () => {
   };
 
   return (
-    <div className="h-screen ">
-      <div className=" grid items-center relative">
-        <Nav initializeBlogs={initializeBlogs} loggedUser={loggedUser} />
-        {notif && <Notification />}
-        <div className="grid p-20 ">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/users"
-              element={
-                <Users
-                  loggedUser={loggedUser}
-                  showNotification={showNotification}
-                  users={users}
-                />
-              }
-            />
-            <Route
-              path="/blogs"
-              element={
-                <Blogs
-                  loggedUser={loggedUser}
-                  blogs={blogs}
-                  handleLike={handleLike}
-                  showNotification={showNotification}
-                />
-              }
-            />
-            <Route path="/signup" element={<SignupForm />} />
-            <Route
-              path="/login"
-              element={
-                <LoginForm
-                  loginFormData={loginFormData}
-                  handleLogin={handleLogin}
-                  setLoginFormData={setLoginFormData}
-                />
-              }
-            />
-            <Route path="/users/:id" element={<User user={user} />} />
-            <Route
-              path="/blogs/:id"
-              element={<Blog handleLike={handleLike} blog={blog} />}
-            />
-          </Routes>
-        </div>
+    <div className="grid min-h-screen items-center relative">
+      <Nav initializeBlogs={initializeBlogs} loggedUser={loggedUser} />
+      {notif && <Notification />}
+      <div className=" pt-32 px-6 md:px-32">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/users"
+            element={
+              <Users
+                loggedUser={loggedUser}
+                showNotification={showNotification}
+                users={users}
+              />
+            }
+          />
+          <Route
+            path="/blogs"
+            element={
+              <Blogs
+                loggedUser={loggedUser}
+                blogs={blogs}
+                handleLike={handleLike}
+                showNotification={showNotification}
+              />
+            }
+          />
+          <Route
+            path="/signup"
+            element={<SignupForm showNotification={showNotification} />}
+          />
+          <Route
+            path="/login"
+            element={
+              <LoginForm
+                loginFormData={loginFormData}
+                handleLogin={handleLogin}
+                setLoginFormData={setLoginFormData}
+              />
+            }
+          />
+          <Route path="/users/:id" element={<User user={user} />} />
+          <Route
+            path="/blogs/:id"
+            element={<Blog handleLike={handleLike} blog={blog} />}
+          />
+        </Routes>
+      </div>
+      <div className=" self-end">
         <Footer />
       </div>
     </div>

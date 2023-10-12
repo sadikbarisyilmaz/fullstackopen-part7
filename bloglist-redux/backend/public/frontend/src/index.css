@@ -1,11 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body {
+  font-family: "Poppins", sans-serif;
+}
 .success {
-  border: 1px solid rgb(132 204 22);
+  background-color: rgb(132 204 22);
 }
 
 .fail {
-  border: 1px solid red;
+  background-color: red;
+}
+
+.btn-primary {
+  @apply px-2 bg-green-500 hover:bg-green-600 text-white
+   rounded-md shadow-md transition-all duration-150 ease-in-out;
+}
+
+.input {
+  @apply px-2 rounded-md border-b shadow-md mt-1;
 }

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { LikeButton } from "./LikeButton";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { RiBookmark3Fill } from "react-icons/ri";
 
 export const BlogCard = ({
   blog,
@@ -35,65 +37,92 @@ export const BlogCard = ({
   };
 
   return (
-    <div className="p-4 border transition ease-in-out delay-150 rounded-lg shadow-md">
-      <div className="flex justify-between">
-        <p className="title">
-          <Link to={`/blogs/${blog.id}`}>
-            <span className="indv-blog">{blog.title}</span>
-          </Link>{" "}
-          <span className="author"> - {blog.author}</span>
-        </p>
-        <button
-          style={{ marginLeft: 5 }}
-          onClick={() => (toggle ? setToggle(false) : setToggle(true))}
-        >
-          {toggle ? (
-            <>
-              <div className="flex gap-1  items-center">
-                <span>Hide</span>
-                <span className="mt-[1px]">
-                  <IoIosArrowUp />
-                </span>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="flex gap-1 items-center">
-                <span>View</span>
-                <span className="mt-[1px]">
-                  <IoIosArrowDown />
-                </span>
-              </div>
-            </>
-          )}
-        </button>
+    <div className="p-4 max-w-md border flex gap-2 transition ease-in-out delay-150 rounded-lg bg-white shadow-md">
+      <div className="text-3xl md:text-4xl text-yellow-500">
+        <Link to={`/blogs/${blog.id}`}>
+          <RiBookmark3Fill />
+        </Link>
       </div>
-
-      <div
-        className={`${
-          toggle ? " h-24" : "h-0"
-        } transition-all duration-300 overflow-hidden w-full`}
-      >
-        <div>
-          <label>Url: </label>
-          <a href={blog.url} className="url" target="_blank">
-            {blog.url}
-          </a>
-          <div className="flex gap-2">
-            <label>Likes: </label>
-            <span className="likes">{blog.likes}</span>
-            <LikeButton handleLike={handleLike} blog={blog} />
+      <div className="w-full grid gap-2">
+        <div className="flex gap-2 justify-between">
+          <p className="title grid">
+            <span className="author text-xs md:text-sm">
+              Author: {blog.author}
+            </span>
+            <Link to={`/blogs/${blog.id}`}>
+              <span className="indv-blog font-bold text-sm md:text-lg">
+                {blog.title}
+              </span>
+            </Link>
+          </p>
+          <div className="-mt-1">
+            <button
+              onClick={() => (toggle ? setToggle(false) : setToggle(true))}
+            >
+              {toggle ? (
+                <>
+                  <div className="flex gap-1  items-center">
+                    <span className="font-semibold text-sm md:text-md">
+                      Hide
+                    </span>
+                    <span className="mt-[1px]">
+                      <IoIosArrowUp />
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex gap-1 items-center">
+                    <span className="font-semibold text-sm md:text-md">
+                      View
+                    </span>
+                    <span className="mt-[1px]">
+                      <IoIosArrowDown />
+                    </span>
+                  </div>
+                </>
+              )}
+            </button>
           </div>
         </div>
-        <div>
-          <label>Created by: </label>
-          <span>{blog.user.name}</span>
+        <div
+          className={`${
+            toggle ? " h-20" : "h-0"
+          } transition-all duration-300 overflow-hidden w-full`}
+        >
+          <div className="text-sm flex flex-col gap-1">
+            <div>
+              <label>URL: </label>
+              <a href={blog.url} className="url" target="_blank">
+                {blog.url}
+              </a>
+            </div>
+            <div className="flex gap-2">
+              <label>Likes: </label>
+              <span className="likes">{blog.likes}</span>
+              <LikeButton handleLike={handleLike} blog={blog} />
+            </div>
+            <div>
+              <label>Created by: </label>
+              <Link to={`/users/${blog.user.id}`}>
+                <span>{blog.user.name}</span>
+              </Link>
+            </div>
+            {username === blog.user.username && (
+              <button
+                className="likeBtn w-fit px-2 border border-black hover:border-red-600 hover:text-red-600
+          rounded-md text-sm flex gap-1 transition-all duration-150 ease-in-out;"
+                id="likeButton"
+                onClick={handleDelete}
+              >
+                <span>Remove</span>
+                <span className="mt-[3.5px]">
+                  <RiDeleteBinLine />
+                </span>
+              </button>
+            )}
+          </div>
         </div>
-        {username === blog.user.username && (
-          <button id="likeButton" onClick={handleDelete}>
-            Remove
-          </button>
-        )}
       </div>
     </div>
   );

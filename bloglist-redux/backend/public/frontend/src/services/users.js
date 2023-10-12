@@ -10,3 +10,13 @@ export const getUsers = async () => {
     }
 
 }
+
+export const newUser = async (data) => {
+    try {
+        const response = await axios.post(baseUrl, data)
+        return response.data
+    } catch (error) {
+        return error.response
+    }
+
+}

@@ -46,14 +46,14 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
   };
 
   return (
-    <div className="flex justify-between md:px-10 p-4  shadow-md">
+    <div className="flex justify-between md:px-10 p-4 bg-[#002d2c]  fixed top-0 w-full shadow-lg">
       <div className="flex justify-center items-center">
-        <h1 className="text-xl font-semibold  h-max align-middle">
+        <h1 className="text-xl font-semibold text-gray-200 h-max align-middle">
           <Link to="/">BlogLister</Link>
         </h1>
       </div>
       <div className="flex gap-4">
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex text-gray-200  justify-center items-center gap-2">
           <Link to="/blogs">Blogs</Link>
           <Link to="/users">Users</Link>
           {!loggedUser && <Link to="/Login">Login</Link>}

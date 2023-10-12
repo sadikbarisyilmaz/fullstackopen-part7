@@ -27,7 +27,7 @@ export const Users = ({ users, loggedUser, showNotification }) => {
                 return (
                   <li key={i}>
                     <div>
-                      <Link to={`/users/${user.id}`}>{user.name}</Link>
+                      <Link to={`/users/${user.id}`}>{user.username}</Link>
                       <span> {user.blogs.length}</span>
                     </div>
                   </li>
