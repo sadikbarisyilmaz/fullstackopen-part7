@@ -54,7 +54,7 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
       </div>
       <div className="flex gap-4">
         <div className="flex font-family: 'Open Sans', sans-serif; justify-center items-center gap-2">
-          <Link to="/blogs">Blogs</Link>
+          <Link to="/blogss">Blogs</Link>
           <Link to="/users">Users</Link>
           {!loggedUser && <Link to="/login">Login</Link>}
         </div>

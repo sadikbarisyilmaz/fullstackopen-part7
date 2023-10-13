@@ -106,7 +106,7 @@ const App = () => {
             }
           />
           <Route
-            path="/blogs"
+            path="/blogss"
             element={
               <Blogs
                 loggedUser={loggedUser}
