@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://bloglist-app.vercel.app/api/blogs'
+const baseUrl = 'https://bloglist-app.vercel.app/blogs'
 
 export const getAll = async () => {
   const request = axios.get(baseUrl)
