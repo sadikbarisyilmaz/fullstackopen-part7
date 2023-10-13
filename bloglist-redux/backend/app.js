@@ -18,12 +18,13 @@ connect(MONGODB_URI).then(() => {
     errorlogger(err);
 })
 const corsOptions = {
-    origin: 'https://bloglist-client.vercel.app/',
+    origin: '*',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
 export const app = express()
-app.use(cors(corsOptions))
+console.log(cors(corsOptions));
+app.use(cors())
 app.use(json())
 app.use(requestLogger)
 app.use(tokenExtractor)
