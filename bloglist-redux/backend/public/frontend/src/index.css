@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .success {
   background-color: rgb(132 204 22);
@@ -13,10 +13,16 @@ body {
 }
 
 .btn-primary {
-  @apply px-2 bg-green-500 hover:bg-green-600 text-white
+  @apply px-2 py-1 bg-green-500 hover:bg-green-600 text-white
    rounded-md shadow-md transition-all duration-150 ease-in-out;
 }
 
 .input {
-  @apply px-2 rounded-md border-b shadow-md mt-1;
+  @apply px-4 py-2 rounded-md border-b shadow-md mt-1;
+}
+.resp-container {
+  @apply md:px-36 px-6 pb-6 grid items-center grow;
+}
+.hover-bg {
+  @apply hover:bg-[#ff9768] transition-all duration-150 rounded-md hover:text-white py-1 px-2;
 }

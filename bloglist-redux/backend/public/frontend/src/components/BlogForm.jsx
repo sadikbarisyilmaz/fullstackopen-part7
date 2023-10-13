@@ -13,7 +13,7 @@ export const BlogForm = ({ handleSubmit, setShowBlogForm }) => {
   };
 
   return (
-    <div className="z-50 bg-black bg-opacity-70 h-screen w-screen flex justify-center items-center fixed top-0 left-0 animate-fadeIn">
+    <div className="z-50 bg-black text-black bg-opacity-70 h-screen w-screen flex justify-center items-center fixed top-0 left-0 animate-fadeIn">
       <div className="p-10 bg-white rounded-2xl">
         <h3>Create new</h3>
         <form onSubmit={fireSubmit}>

@@ -46,14 +46,14 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
   };
 
   return (
-    <div className="flex justify-between md:px-10 p-4 bg-[#002d2c]  fixed top-0 w-full shadow-lg">
+    <div className="flex text-white justify-between md:px-10 p-4 bg-[#ff5a19] fixed top-0 w-full shadow-lg">
       <div className="flex justify-center items-center">
-        <h1 className="text-xl font-semibold text-gray-200 h-max align-middle">
+        <h1 className="text-xl font-semibold font-family: 'Open Sans', sans-serif; h-max align-middle">
           <Link to="/">BlogLister</Link>
         </h1>
       </div>
       <div className="flex gap-4">
-        <div className="flex text-gray-200  justify-center items-center gap-2">
+        <div className="flex font-family: 'Open Sans', sans-serif; justify-center items-center gap-2">
           <Link to="/blogs">Blogs</Link>
           <Link to="/users">Users</Link>
           {!loggedUser && <Link to="/Login">Login</Link>}
@@ -68,9 +68,9 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                 }, 100)
               }
               onFocus={() => setToggle(true)}
-              className="flex items-center text-xl border border-gray-500 text-gray-500 rounded-full p-1 toggle cursor-pointer"
+              className="flex items-center text-xl border border-white text-white rounded-full p-1 toggle cursor-pointer"
             >
-              <span className="relative">
+              <span className="relative text-white">
                 <BsFillPersonFill />
               </span>
             </div>
@@ -82,19 +82,25 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                     : "animate-fadeOut opacity-0"
                 }`}
               >
-                <div className="grid gap-2 justify-center">
+                <div className="grid gap-2 justify-center  text-black ">
                   {loggedUser ? (
                     <>
                       {toggle && (
                         <>
-                          {loggedUser.name} Logged In <br />
+                          <p className=" cursor-default hover-bg">
+                            {loggedUser.name} Logged In
+                          </p>
+                          <hr />
                           <button
-                            className=" z-40"
+                            className="hover-bg z-40"
                             onClick={() => setShowBlogForm(true)}
                           >
                             New Blog
                           </button>
-                          <button onClick={logout}>Logout</button>{" "}
+                          <hr />
+                          <button className="hover-bg" onClick={logout}>
+                            Logout
+                          </button>{" "}
                         </>
                       )}
                     </>

@@ -89,10 +89,10 @@ const App = () => {
   };
 
   return (
-    <div className="grid min-h-screen items-center relative">
+    <div className="flex flex-col justify-between bg-[#ffffff] min-h-screen items-center relative pt-16  ">
       <Nav initializeBlogs={initializeBlogs} loggedUser={loggedUser} />
       {notif && <Notification />}
-      <div className=" pt-32 px-6 md:px-32">
+      <main className="grow w-full flex flex-col justify-center items-center">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -136,8 +136,8 @@ const App = () => {
             element={<Blog handleLike={handleLike} blog={blog} />}
           />
         </Routes>
-      </div>
-      <div className=" self-end">
+      </main>
+      <div className="w-full self-end">
         <Footer />
       </div>
     </div>

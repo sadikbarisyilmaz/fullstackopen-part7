@@ -2,14 +2,15 @@ import { Link } from "react-router-dom";
 
 export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
   return (
-    <div className="animate-fadeIn flex justify-center">
-      <div className="bg-white shadow-xl py-10 md:py-20 px-6 md:px-12 rounded-md">
-        <h2 className=" text-2xl md:text-3xl font-bold mb-10">
+    <div className="animate-fadeIn resp-container">
+      <div className="bg-white h-fit shadow-xl py-10 md:py-20 px-6 md:px-12 rounded-md">
+        <h2 className=" text-2xl md:text-3xl font-bold ">
           Log In to BlogLister
         </h2>
+        <div className="border my-6 mx-4"></div>
         <form className="grid gap-4" onSubmit={handleLogin}>
           <div className="grid w-full">
-            <label>Username</label>
+            <label className="text-[#ff5a19]   font-bold">Username</label>
             <input
               className="input"
               id="username"
@@ -25,7 +26,7 @@ export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
             />
           </div>
           <div className="grid w-full">
-            <label>Password</label>
+            <label className="text-[#ff5a19]   font-bold">Password</label>
             <input
               className="input"
               id="password"
@@ -44,7 +45,10 @@ export const LoginForm = ({ handleLogin, loginFormData, setLoginFormData }) => {
             Login
           </button>
           <div className="mt-2 text-sm text-center">
-            Don't Have an Account ? <Link to="/signup">Sign Up</Link>
+            Don't Have an Account ?{" "}
+            <Link to="/signup">
+              <span className="text-[#ff5a19]   font-bold">Sign Up</span>
+            </Link>
           </div>
         </form>
       </div>

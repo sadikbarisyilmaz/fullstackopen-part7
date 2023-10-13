@@ -34,14 +34,15 @@ export const SignupForm = ({ showNotification }) => {
     });
   };
   return (
-    <div className="animate-fadeIn flex justify-center">
-      <div className="bg-white shadow-xl py-10 md:py-20 px-6 md:px-12 rounded-md">
-        <h2 className=" text-xl md:text-3xl font-bold mb-4">
-          Signup to BlogLister
+    <div className="animate-fadeIn flex justify-center items-center">
+      <div className="bg-white h-fit shadow-xl py-10 md:py-20 px-6 md:px-12 rounded-md">
+        <h2 className=" text-xl md:text-3xl font-bold ">
+          Sign Up to BlogLister
         </h2>
+        <div className="border my-6 mx-4"></div>
         <form className="grid gap-4" onSubmit={handleSignup}>
           <div className="grid w-full">
-            <label>Name</label>
+            <label className="text-[#ff5a19]   font-bold">Name</label>
             <input
               className="input"
               id="name"
@@ -58,7 +59,7 @@ export const SignupForm = ({ showNotification }) => {
             />
           </div>
           <div className="grid w-full">
-            <label>Username</label>
+            <label className="text-[#ff5a19]   font-bold">Username</label>
             <input
               className="input"
               id="username"
@@ -75,7 +76,7 @@ export const SignupForm = ({ showNotification }) => {
             />
           </div>
           <div className="grid w-full">
-            <label>Password</label>
+            <label className="text-[#ff5a19]   font-bold">Password</label>
             <input
               className="input"
               id="password"
@@ -92,10 +93,13 @@ export const SignupForm = ({ showNotification }) => {
             />
           </div>
           <button className="btn-primary" type="submit">
-            Signup
+            Sign Up
           </button>
           <div className="mt-2 text-sm text-center">
-            Already Have an Account ? <Link to="/login">Login</Link>
+            Already Have an Account ?{" "}
+            <Link to="/login">
+              <span className="text-[#ff5a19]   font-bold">Login</span>
+            </Link>
           </div>
         </form>
       </div>

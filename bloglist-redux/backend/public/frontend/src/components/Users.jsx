@@ -4,23 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 export const Users = ({ users, loggedUser, showNotification }) => {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!loggedUser) {
-      showNotification("Please Login to browse users", "fail");
-      navigate("/");
-    }
-  }, []);
-  useEffect(() => {
-    if (!loggedUser) {
-      showNotification("Please Login to browse blogs", "fail");
-      navigate("/");
-    }
-  }, [loggedUser]);
+
+  if (!loggedUser) {
+    return (
+      <div className="text-center">
+        <h2>Please Login to Browse Users</h2>
+        <button>
+          <Link to="/login">Login</Link>
+        </button>
+      </div>
+    );
+  }
   return (
     <>
       {loggedUser && (
-        <div className="animate-fadeIn">
-          <h1>Users</h1>
+        <div className="animate-fadeIn flex flex-col justify-center items-center w-full">
+          {/* <h1>Users</h1> */}
           <ul>
             {users &&
               [...users].map((user, i) => {
