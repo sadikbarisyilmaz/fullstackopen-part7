@@ -5,6 +5,7 @@ import { loginUser } from "../reducers/userReducer";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useState } from "react";
 import { BlogForm } from "./BlogForm";
+import { createBlog } from "../services/blogs";
 
 export const Nav = ({ loggedUser, initializeBlogs }) => {
   const [toggle, setToggle] = useState(false);
