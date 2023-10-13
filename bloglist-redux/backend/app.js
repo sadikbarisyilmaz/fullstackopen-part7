@@ -27,11 +27,11 @@ app.use(json())
 app.use(requestLogger)
 app.use(tokenExtractor)
 if (process.env.NODE_ENV === 'test') {
-    app.use('/testing', testingRouter)
+    app.use('/api/testing', testingRouter)
 }
-app.use('/blogs', userExtractor, blogsRouter)
-app.use('/users', usersRouter)
-app.use('/login', loginRouter)
+app.use('/api/blogs', userExtractor, blogsRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
 app.use(unknownEndpoint)
 app.use(errorHandler)
