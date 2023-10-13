@@ -10,8 +10,6 @@ import { loginRouter } from './controllers/login.js'
 
 import { testingRouter } from "./controllers/testing.js"
 
-
-
 connect(MONGODB_URI).then(() => {
     info("Connected to MongoDB");
 }).catch((err) => {
