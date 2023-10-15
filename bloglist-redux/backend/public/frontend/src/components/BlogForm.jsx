@@ -14,13 +14,15 @@ export const BlogForm = ({ handleSubmit, setShowBlogForm }) => {
 
   return (
     <div className="z-50 bg-black text-black bg-opacity-70 h-screen w-screen flex justify-center items-center fixed top-0 left-0 animate-fadeIn">
-      <div className="p-10 bg-white rounded-2xl">
-        <h3>Create new</h3>
-        <form onSubmit={fireSubmit}>
-          <div>
-            Title
-            <br />
+      <div className="p-10 grid bg-white rounded-2xl">
+        <h3 className="text-2xl text-center font-semibold mb-6">
+          Create New Blog
+        </h3>
+        <form className="grid gap-2" onSubmit={fireSubmit}>
+          <div className="grid">
+            <label className="text-[#ff5a19]   font-bold">Title</label>
             <input
+              className="input"
               id="title"
               type="text"
               value={blogForm.title}
@@ -35,10 +37,11 @@ export const BlogForm = ({ handleSubmit, setShowBlogForm }) => {
             />
           </div>
 
-          <div>
-            Author
-            <br />
+          <div className="grid">
+            <label className="text-[#ff5a19]   font-bold">Author</label>
+
             <input
+              className="input"
               id="author"
               type="text"
               value={blogForm.author}
@@ -52,10 +55,10 @@ export const BlogForm = ({ handleSubmit, setShowBlogForm }) => {
               }
             />
           </div>
-          <div>
-            Url
-            <br />
+          <div className="grid">
+            <label className="text-[#ff5a19]   font-bold">Url</label>
             <input
+              className="input"
               id="url"
               type="text"
               value={blogForm.url}
@@ -69,10 +72,13 @@ export const BlogForm = ({ handleSubmit, setShowBlogForm }) => {
               }
             />
           </div>
-          <br />
-          <button type="submit">Submit</button>
+
+          <button className="btn-primary w-full mt-4" type="submit">
+            Submit
+          </button>
         </form>
         <button
+          className="btn-secondary w-full mt-1"
           onClick={() => {
             setShowBlogForm(false);
           }}
