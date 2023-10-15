@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BlogCard } from "./BlogCard";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PleaseLogin } from "./PleaseLogin";
 
 export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {

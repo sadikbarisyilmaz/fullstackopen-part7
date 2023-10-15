@@ -92,7 +92,7 @@ const App = () => {
     <div className="flex flex-col justify-between bg-[#ffffff] min-h-screen items-center relative">
       <Nav initializeBlogs={initializeBlogs} loggedUser={loggedUser} />
       {notif && <Notification />}
-      <main className="grow w-full flex flex-col justify-center items-center">
+      <main className="grow w-full flex flex-col">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route

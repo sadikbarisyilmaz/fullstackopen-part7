@@ -37,38 +37,55 @@ export const Blog = ({ blog, handleLike }) => {
     return null;
   }
   return (
-    <div className="animate-fadeIn">
-      <h1>{blog.title}</h1>
-      <p>{blog.url}</p>
-      <div className="flex gap-2">
-        <span className="likes">{blog.likes}</span>
-        <label>Likes</label>
-        <LikeButton handleLike={handleLike} blog={blog} />
-      </div>
-      <p>added by {blog.author}</p>
-      <hr />
-      <h2>Comments</h2>
-      <div>
-        <h3>Add Comment</h3>
-        <form>
-          <input
-            onChange={(e) => setComment(e.target.value)}
-            type="text"
-            required
-            minLength={3}
-            name="comment"
-            value={comment}
-          />
-          <input onClick={handleComment} type="submit" value="Post" />
-        </form>
-      </div>
-      <div>
-        <ul>
-          {blog.comments &&
-            blog.comments.map((comment, i) => {
-              return <li key={i}>{`"${comment}"`}</li>;
-            })}
-        </ul>
+    <div className="animate-fadeIn grow bg-[#fffdfa] px-6 md:px-28 pt-28 pb-4 flex flex-col justify-center items-center">
+      <div className="flex bg-white flex-col p-10 shadow-xl rounded-md">
+        <h1 className="py-10 text-3xl md:text-5xl text-[#ff5a19]">
+          {blog.title}
+        </h1>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-xl mb-4 md:text-2xl">Post by {blog.author}</h2>
+            <div className="flex gap-2">
+              <h2 className="font-bold">Blog Link: </h2>
+              <a href="blog.url" target="_blank">
+                {blog.url}
+              </a>
+            </div>
+            <div className="flex gap-2">
+              <h2 className="font-bold">Lİkes: </h2>
+              <span className="likes">{blog.likes}</span>
+              <LikeButton handleLike={handleLike} blog={blog} />
+            </div>
+            <h3>Add Comment</h3>
+            <form>
+              <textarea
+                onChange={(e) => setComment(e.target.value)}
+                type="text"
+                required
+                placeholder="Leave a comment"
+                minLength={3}
+                name="comment"
+                value={comment}
+                class="mt-2 w-full p-2 rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
+              />
+            </form>
+            <input
+              className="btn-primary w-20"
+              onClick={handleComment}
+              type="submit"
+              value="Post"
+            />
+          </div>
+          <div className="max-h-[250px] overflow-y-scroll no-scrollbar">
+            <h2 className="text-xl mb-4 md:text-2xl">Comments</h2>
+            <ul>
+              {blog.comments &&
+                blog.comments.map((comment, i) => {
+                  return <li key={i}>{`"${comment}"`}</li>;
+                })}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

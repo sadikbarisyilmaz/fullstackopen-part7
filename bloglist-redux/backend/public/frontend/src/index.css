@@ -9,7 +9,7 @@ body {
 }
 
 .fail {
-  background-color: red;
+  background-color: rgb(220 38 38);
 }
 
 .btn-primary {
@@ -29,4 +29,19 @@ body {
 }
 .hover-bg {
   @apply hover:bg-[#ff9768] transition-all duration-150 rounded-md hover:text-white py-1 px-2;
+}
+
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
 }
