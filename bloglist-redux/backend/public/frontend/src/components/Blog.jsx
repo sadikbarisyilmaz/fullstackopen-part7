@@ -45,10 +45,10 @@ export const Blog = ({ blog, handleLike }) => {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-2">
             <h2 className="text-xl mb-4 md:text-2xl">Post by {blog.author}</h2>
-            <div className="flex gap-2">
+            <div className="flex gap-2 ">
               <h2 className="font-bold">Blog Link: </h2>
-              <a href="blog.url" target="_blank">
-                {blog.url}
+              <a className=" " href="blog.url" target="_blank">
+                <p className="break-normal">{blog.url}</p>
               </a>
             </div>
             <div className="flex gap-2">
@@ -66,7 +66,7 @@ export const Blog = ({ blog, handleLike }) => {
                 minLength={3}
                 name="comment"
                 value={comment}
-                class="mt-2 w-full p-2 rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
+                className="mt-2 w-full p-2 rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
               />
             </form>
             <input
@@ -77,13 +77,17 @@ export const Blog = ({ blog, handleLike }) => {
             />
           </div>
           <div className="max-h-[250px] overflow-y-scroll no-scrollbar">
-            <h2 className="text-xl mb-4 md:text-2xl">Comments</h2>
-            <ul>
-              {blog.comments &&
-                blog.comments.map((comment, i) => {
-                  return <li key={i}>{`"${comment}"`}</li>;
-                })}
-            </ul>
+            {blog.comments.length > 0 && (
+              <>
+                <h2 className="text-xl mb-4 md:text-2xl">Comments</h2>
+                <ul>
+                  {blog.comments &&
+                    blog.comments.map((comment, i) => {
+                      return <li key={i}>{`"${comment}"`}</li>;
+                    })}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       </div>
