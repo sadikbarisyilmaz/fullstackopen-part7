@@ -17,7 +17,7 @@ body {
    rounded-md shadow-md transition-all duration-150 ease-in-out;
 }
 .btn-secondary {
-  @apply px-2 py-1 bg-red-500 hover:bg-red-600 text-white
+  @apply px-2 py-1 bg-gray-300 hover:bg-gray-400 text-white
    rounded-md shadow-md transition-all duration-150 ease-in-out;
 }
 

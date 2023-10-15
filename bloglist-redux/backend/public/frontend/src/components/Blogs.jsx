@@ -37,7 +37,7 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
       <div className="md:px-36 px-6 py-12 ">
         {loggedUser && (
           <div className="blog justify-center grid">
-            <div className="grid grid-cols-3 justify-center gap-4">
+            <div className="grid lg:grid-cols-3 justify-center gap-4">
               {[...blogs]
                 .filter((blog) =>
                   blog.title.toLowerCase().includes(filter.toLowerCase())
