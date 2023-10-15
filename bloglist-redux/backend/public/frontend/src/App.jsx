@@ -89,7 +89,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col justify-between bg-[#ffffff] min-h-screen items-center relative pt-16  ">
+    <div className="flex flex-col justify-between bg-[#ffffff] min-h-screen items-center relative">
       <Nav initializeBlogs={initializeBlogs} loggedUser={loggedUser} />
       {notif && <Notification />}
       <main className="grow w-full flex flex-col justify-center items-center">

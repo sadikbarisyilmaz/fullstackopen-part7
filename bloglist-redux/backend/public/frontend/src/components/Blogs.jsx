@@ -12,12 +12,21 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
   }
 
   return (
-    <div className="w-full animate-fadeIn gap-6 resp-container">
-      <div className="border-b text-center md:text-left py-4 justify-center md:justify-start  gap-4">
-        <h2 className="text-7xl">Blogs</h2>
-        <span className="flex p-4 w-fit rounded-md  gap-2">
+    <div className="w-full pt-[70px] animate-fadeIn flex bg-[#fffdfa] flex-col justify-center grow">
+      <div className="pt-20 md:px-44 px-6 pb-16 flex flex-col text-center py-4 justify-center items-center gap-8 md:gap-14">
+        <h2 className="text-3xl md:text-7xl text-[#ff5a19]">
+          Discover Shared Blogs !
+        </h2>
+        <p className="max-w-xl  indent-8">
+          Explore a world of interesting blogs, where users share their favorite
+          reads. Whether you're into travel, food, or thought-provoking essays,
+          our platform has a variety of content that fellow users have enjoyed.
+          Join the conversation, discover new things, and connect with
+          like-minded folks by commenting on your favorite blogs !
+        </p>
+        <span className="flex w-fit rounded-md gap-2">
           <input
-            placeholder="Find Blogs"
+            placeholder="Search Blogs"
             onChange={(e) => setFilter(e.target.value)}
             value={filter}
             className="input p-2"
@@ -25,10 +34,10 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
           />
         </span>
       </div>
-      <div className="">
+      <div className="md:px-36 px-6 py-12 ">
         {loggedUser && (
-          <div className="blog grid">
-            <div className="grid justify-center gap-2">
+          <div className="blog justify-center grid">
+            <div className="grid grid-cols-3 justify-center gap-4">
               {[...blogs]
                 .filter((blog) =>
                   blog.title.toLowerCase().includes(filter.toLowerCase())
