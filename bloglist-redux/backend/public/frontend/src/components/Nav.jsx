@@ -47,9 +47,9 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
   };
 
   return (
-    <div className="flex text-white justify-between md:px-10 p-4 bg-[#ff5a19] fixed top-0 w-full shadow-lg">
+    <div className="flex text-white justify-between md:px-10 p-4 bg-[#ff5a19] fixed top-0 w-full shadow-lg z-20">
       <div className="flex justify-center items-center">
-        <h1 className="text-xl font-semibold font-family: 'Open Sans', sans-serif; h-max align-middle">
+        <h1 className="text-xl font-semibold font-family: 'Open Sans', sans-serif; h-max align-middle border-[3px] px-3 py-1">
           <Link to="/">BlogLister</Link>
         </h1>
       </div>
@@ -69,9 +69,9 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                 }, 100)
               }
               onFocus={() => setToggle(true)}
-              className="flex items-center text-xl border border-white text-white rounded-full p-1 toggle cursor-pointer"
+              className="flex justify-center w-[42px]  items-center text-xl border border-white text-white rounded-full p-1 toggle cursor-pointer"
             >
-              <span className="relative text-white">
+              <span className="relative text-2xl text-white">
                 <BsFillPersonFill />
               </span>
             </div>

@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BlogCard } from "./BlogCard";
 import { Link, useNavigate } from "react-router-dom";
+import { PleaseLogin } from "./PleaseLogin";
 
 export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
   if (!loggedUser) {
-    return (
-      <div className="text-center">
-        <h2>Please Login to Browse Blogs</h2>
-        <button>
-          <Link to="/login">Login</Link>
-        </button>
-      </div>
-    );
+    return <PleaseLogin />;
   }
 
   return (
