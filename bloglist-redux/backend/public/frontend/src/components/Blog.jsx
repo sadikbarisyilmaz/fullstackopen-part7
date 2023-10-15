@@ -38,7 +38,7 @@ export const Blog = ({ blog, handleLike }) => {
   }
   return (
     <div className="animate-fadeIn grow bg-[#fffdfa] px-6 md:px-28 pt-28 pb-4 flex flex-col justify-center items-center">
-      <div className="flex bg-white flex-col p-10 shadow-xl rounded-md">
+      <div className="flex bg-white flex-col md:py-10 md:px-10 px-4 shadow-xl rounded-md">
         <h1 className="py-10 text-3xl md:text-5xl text-[#ff5a19]">
           {blog.title}
         </h1>
