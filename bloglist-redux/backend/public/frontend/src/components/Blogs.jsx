@@ -11,7 +11,7 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
   }
 
   return (
-    <div className="w-full pt-[70px] animate-fadeIn flex bg-[#fffdfa] flex-col justify-center grow">
+    <div className="w-full pt-[70px] animate-fadeIn flex bg-[#fffdfa] flex-col  grow">
       <div className="bg-[url('.././public/bg-home.jpg')] bg-no-repeat bg-cover ">
         <div className="flex flex-col text-center w-full justify-center items-center pt-20 md:px-44 px-6 pb-16 py-4  md:gap-14 bg-black bg-opacity-60  gap-8 backdrop-blur-sm">
           <h2 className="text-3xl md:text-7xl drop-shadow-2xl text-[#ff5a19] font-bold">
