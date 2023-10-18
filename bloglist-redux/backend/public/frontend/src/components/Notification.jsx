@@ -8,7 +8,7 @@ export const Notification = () => {
   return (
     <>
       {notif.length > 0 && (
-        <div className="fixed top-24 w-full z-10 flex justify-center ">
+        <div className="fixed top-24 w-full z-10 flex justify-center max-w-[300px] sm:max-w-fit">
           <div
             className={`${notif[1]} w-fit px-6 animate-bounce rounded-lg  flex gap-2`}
           >
