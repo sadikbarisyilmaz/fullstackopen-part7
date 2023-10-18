@@ -90,9 +90,9 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                     <>
                       {toggle && (
                         <>
-                          <p className=" cursor-default hover-bg">
+                          <p className="cursor-default hover-bg group">
                             {" "}
-                            <span className="text-[#ff5a19] font-bold">
+                            <span className="text-[#ff5a19] font-bold group-hover:text-white">
                               {loggedUser.name}{" "}
                             </span>
                             Logged In
