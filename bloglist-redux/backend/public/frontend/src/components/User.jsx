@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
+import { Loader } from "./Loader";
 
 export const User = ({ user }) => {
   if (!user) {
-    return null;
+    return (
+      <div className="animate-fadeIn grow bg-[#fffdfa] px-6 md:px-32 pt-28 pb-4 flex flex-col justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
-  console.log(user);
   return (
     <div className="animate-fadeIn grow bg-[#fffdfa] px-6 md:px-32 pt-28 pb-4 flex flex-col justify-center items-center">
       <div className="flex bg-white flex-col justify-center items-center p-6 shadow-xl rounded-md">

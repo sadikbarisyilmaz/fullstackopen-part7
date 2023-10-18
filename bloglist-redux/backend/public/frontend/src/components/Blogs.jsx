@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { BlogCard } from "./BlogCard";
 import { useNavigate } from "react-router-dom";
 import { PleaseLogin } from "./PleaseLogin";
+import { Loader } from "./Loader";
 
 export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
-
+  console.log(blogs);
   if (!loggedUser) {
     return <PleaseLogin />;
   }
@@ -35,7 +36,7 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
         </span>
       </div>
       <div className="md:px-36 px-6 py-12 ">
-        {loggedUser && (
+        {blogs.length > 0 ? (
           <div className="blog justify-center grid">
             <div className="grid lg:grid-cols-3 justify-center gap-4">
               {[...blogs]
@@ -55,6 +56,8 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
                 ))}
             </div>
           </div>
+        ) : (
+          <Loader />
         )}
       </div>
     </div>

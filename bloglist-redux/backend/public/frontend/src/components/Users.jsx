@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PleaseLogin } from "./PleaseLogin";
+import { Loader } from "./Loader";
 
 export const Users = ({ users, loggedUser, showNotification }) => {
   const navigate = useNavigate();
-
+  console.log(users);
   if (!loggedUser) {
     return <PleaseLogin />;
   }
   return (
     <div className="grow bg-[#fffdfa] px-6 md:px-32 pt-32 pb-4">
       <h1 className="p-4 text-3xl md:text-6xl text-[#ff5a19]">User Stats</h1>
-      {loggedUser && (
+      {users.length > 0 ? (
         <div className="animate-fadeIn flex flex-col  w-full">
           <div className="sm:p-4 shadow-xl">
             <div className="rounded-lg border border-gray-200">
@@ -63,6 +64,8 @@ export const Users = ({ users, loggedUser, showNotification }) => {
             </div>
           </div>
         </div>
+      ) : (
+        <Loader />
       )}
     </div>
   );
