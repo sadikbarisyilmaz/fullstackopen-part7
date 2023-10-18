@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { BlogCard } from "./BlogCard";
-import { useNavigate } from "react-router-dom";
 import { PleaseLogin } from "./PleaseLogin";
 import { Loader } from "./Loader";
 
 export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
   const [filter, setFilter] = useState("");
-  const navigate = useNavigate();
-  console.log(blogs);
+
   if (!loggedUser) {
     return <PleaseLogin />;
   }
@@ -16,9 +14,9 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
     <div className="w-full pt-[70px] animate-fadeIn flex bg-[#fffdfa] flex-col justify-center grow">
       <div className="pt-20 md:px-44 px-6 pb-16 flex flex-col text-center py-4 justify-center items-center gap-8 md:gap-14">
         <h2 className="text-3xl md:text-7xl text-[#ff5a19]">
-          Discover Shared Blogs !
+          Discover Awesome Blogs !
         </h2>
-        <p className="max-w-xl  indent-8">
+        <p className="max-w-xl ">
           Explore a world of interesting blogs, where users share their favorite
           reads. Whether you're into travel, food, or thought-provoking essays,
           our platform has a variety of content that fellow users have enjoyed.

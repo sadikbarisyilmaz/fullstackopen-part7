@@ -8,7 +8,6 @@ import { Loader } from "./Loader";
 
 export const Blog = ({ blog, handleLike }) => {
   const [comment, setComment] = useState("");
-  console.log(blog);
   const dispatch = useDispatch();
   const showNotification = async (msg, type) => {
     dispatch(newNotification([msg, type]));
@@ -89,7 +88,7 @@ export const Blog = ({ blog, handleLike }) => {
                 {blog.comments.length > 0 && (
                   <>
                     <h2 className="text-xl mb-4 md:text-2xl">Comments</h2>
-                    <ul>
+                    <ul className="max-h-[200px] overflow-y-scroll no-scrollbar">
                       {blog.comments &&
                         blog.comments.map((comment, i) => {
                           return <li key={i}>{`"${comment}"`}</li>;

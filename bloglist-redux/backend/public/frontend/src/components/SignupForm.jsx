@@ -18,7 +18,6 @@ export const SignupForm = ({ showNotification }) => {
     e.preventDefault();
 
     newUser(formData).then((e) => {
-      console.log(e);
       if (e.username === formData.username) {
         showNotification("Signup Successfull", "success");
         dispatch(initializeUsers());

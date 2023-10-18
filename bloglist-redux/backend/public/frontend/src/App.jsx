@@ -97,13 +97,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route
             path="/users"
-            element={
-              <Users
-                loggedUser={loggedUser}
-                showNotification={showNotification}
-                users={users}
-              />
-            }
+            element={<Users loggedUser={loggedUser} users={users} />}
           />
           <Route
             path="/blogs"

@@ -10,9 +10,10 @@ import { createBlog } from "../services/blogs";
 export const Nav = ({ loggedUser, initializeBlogs }) => {
   const [toggle, setToggle] = useState(false);
   const [showBlogForm, setShowBlogForm] = useState(false);
+  const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
-
   const handleSubmit = async (blogForm, setBlogForm) => {
+    setloading(true);
     const response = await createBlog(blogForm, loggedUser.token);
     if (response.status === 201) {
       dispatch(initializeBlogs());
@@ -26,9 +27,11 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
         url: "",
       });
       setShowBlogForm(false);
+      setloading(false);
       return blogForm;
     } else {
       showNotification(response.data.error, "fail");
+      setloading(false);
     }
   };
 
@@ -40,7 +43,6 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
   };
 
   const logout = () => {
-    console.log("logout");
     dispatch(loginUser(null));
     window.localStorage.removeItem("loggedUser");
     showNotification("Logout Successful", "success");
@@ -89,7 +91,11 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
                       {toggle && (
                         <>
                           <p className=" cursor-default hover-bg">
-                            {loggedUser.name} Logged In
+                            {" "}
+                            <span className="text-[#ff5a19] font-bold">
+                              {loggedUser.name}{" "}
+                            </span>
+                            Logged In
                           </p>
                           <hr />
                           <button
@@ -118,6 +124,7 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
       </div>
       {showBlogForm && (
         <BlogForm
+          loading={loading}
           setShowBlogForm={setShowBlogForm}
           handleSubmit={handleSubmit}
         />

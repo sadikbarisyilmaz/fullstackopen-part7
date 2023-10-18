@@ -1,11 +1,9 @@
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PleaseLogin } from "./PleaseLogin";
 import { Loader } from "./Loader";
 
-export const Users = ({ users, loggedUser, showNotification }) => {
+export const Users = ({ users, loggedUser }) => {
   const navigate = useNavigate();
-  console.log(users);
   if (!loggedUser) {
     return <PleaseLogin />;
   }
