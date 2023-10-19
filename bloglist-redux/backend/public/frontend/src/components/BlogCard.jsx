@@ -85,7 +85,7 @@ export const BlogCard = ({
         </div>
         <div
           className={`${
-            toggle ? " h-28 md:h-20" : "h-0"
+            toggle ? " h-28 md:min-h-34" : "h-0"
           } transition-all duration-300 overflow-hidden w-full`}
         >
           <div className="text-sm flex flex-col gap-1">
