@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', ({ username, password }) => {
-    cy.request('POST', 'http://localhost:3003/login', {
+    cy.request('POST', 'http://localhost:3003/api/login', {
         username: username, password: password
     }).then(response => {
         localStorage.setItem('loggedUser', JSON.stringify(response.body))

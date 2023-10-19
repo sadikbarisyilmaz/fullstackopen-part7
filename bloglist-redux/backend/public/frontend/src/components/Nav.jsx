@@ -1,17 +1,17 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { newNotification } from "../reducers/notificationReducer";
 import { loginUser } from "../reducers/userReducer";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useState } from "react";
 import { BlogForm } from "./BlogForm";
 import { createBlog } from "../services/blogs";
-
 export const Nav = ({ loggedUser, initializeBlogs }) => {
   const [toggle, setToggle] = useState(false);
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = async (blogForm, setBlogForm) => {
     setloading(true);
     const response = await createBlog(blogForm, loggedUser.token);
@@ -26,6 +26,7 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
         author: "",
         url: "",
       });
+      navigate("blogs");
       setShowBlogForm(false);
       setloading(false);
       return blogForm;
@@ -57,13 +58,16 @@ export const Nav = ({ loggedUser, initializeBlogs }) => {
       </div>
       <div className="flex gap-4">
         <div className="flex font-family: 'Open Sans', sans-serif; justify-center items-center gap-2">
-          <Link to="/blogs">Blogs</Link>
+          <Link id="go-to-blogs" to="/blogs">
+            Blogs
+          </Link>
           <Link to="/users">Users</Link>
           {!loggedUser && <Link to="/login">Login</Link>}
         </div>
         {loggedUser ? (
           <>
             <div
+              id="user-menu"
               tabIndex={0}
               onBlur={() =>
                 setTimeout(() => {

@@ -114,7 +114,7 @@ export const BlogCard = ({
                   id="likeButton"
                   onClick={handleDelete}
                 >
-                  <span className=" text-2xl mr-1 -mt-1">
+                  <span id="delete-btn" className="text-2xl mr-1 -mt-1">
                     <RiDeleteBinLine />
                   </span>
                 </button>

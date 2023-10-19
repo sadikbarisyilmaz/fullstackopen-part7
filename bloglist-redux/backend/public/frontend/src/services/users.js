@@ -1,5 +1,6 @@
 import axios from 'axios'
 const baseUrl = "https://bloglist-app.vercel.app/api/users"
+//use http://localhost:3003/api/ for cypress
 
 export const getUsers = async () => {
     try {

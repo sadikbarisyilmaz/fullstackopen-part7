@@ -17,7 +17,7 @@ export const Home = ({}) => {
           </p>
 
           {!loggedUser && (
-            <button className="btn-primary w-20 drop-shadow-lg mt-2">
+            <button className="btn-primary w-20 drop-shadow-lg mt-2 go-to-login">
               {" "}
               <Link to="/login">Login</Link>
             </button>

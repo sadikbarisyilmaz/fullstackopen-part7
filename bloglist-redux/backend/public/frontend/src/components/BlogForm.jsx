@@ -6,7 +6,6 @@ export const BlogForm = ({ handleSubmit, setShowBlogForm, loading }) => {
     author: "",
     url: "",
   });
-  console.log(loading);
   const fireSubmit = (e) => {
     e.preventDefault();
     handleSubmit(blogForm, setBlogForm);
