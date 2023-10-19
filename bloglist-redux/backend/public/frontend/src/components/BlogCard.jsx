@@ -100,7 +100,7 @@ export const BlogCard = ({
               <span className="likes">{blog.likes}</span>
               <LikeButton handleLike={handleLike} blog={blog} />
             </div>
-            <div className="flex md:flex-row flex-col gap-2 justify-between">
+            <div className="flex gap-2 justify-between">
               <div>
                 <label className="font-semibold">Created by: </label>
                 <Link to={`/users/${blog.user.id}`}>
