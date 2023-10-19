@@ -7,7 +7,9 @@ body {
 .success {
   background-color: rgb(132 204 22);
 }
-
+a {
+  word-break: break-all;
+}
 .fail {
   background-color: rgb(220 38 38);
 }

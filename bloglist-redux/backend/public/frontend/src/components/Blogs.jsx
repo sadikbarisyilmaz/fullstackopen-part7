@@ -9,7 +9,11 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
   if (!loggedUser) {
     return <PleaseLogin />;
   }
-
+  console.log(
+    [...blogs].filter((blog) =>
+      blog.title.toLowerCase().includes(filter.toLowerCase())
+    )
+  );
   return (
     <div className="w-full pt-[70px] animate-fadeIn flex bg-[#fffdfa] flex-col  grow">
       <div className="bg-[url('.././public/bg-home.jpg')] bg-no-repeat bg-cover ">
@@ -40,21 +44,33 @@ export const Blogs = ({ handleLike, showNotification, blogs, loggedUser }) => {
         {blogs.length > 0 ? (
           <div className="blog justify-center grid">
             <div className="grid lg:grid-cols-3 justify-center gap-4">
-              {[...blogs]
-                .filter((blog) =>
-                  blog.title.toLowerCase().includes(filter.toLowerCase())
-                )
-                .sort((a, b) => b.likes - a.likes)
-                .map((blog) => (
-                  <BlogCard
-                    key={blog.id}
-                    blog={blog}
-                    token={loggedUser.token}
-                    username={loggedUser.username}
-                    handleLike={handleLike}
-                    showNotification={showNotification}
-                  />
-                ))}
+              {[...blogs].filter((blog) =>
+                blog.title.toLowerCase().includes(filter.toLowerCase())
+              ).length > 0 ? (
+                [...blogs]
+                  .filter((blog) =>
+                    blog.title.toLowerCase().includes(filter.toLowerCase())
+                  )
+                  .sort((a, b) => b.likes - a.likes)
+                  .map((blog) => (
+                    <BlogCard
+                      key={blog.id}
+                      blog={blog}
+                      token={loggedUser.token}
+                      username={loggedUser.username}
+                      handleLike={handleLike}
+                      showNotification={showNotification}
+                    />
+                  ))
+              ) : (
+                <>
+                  <div className="text-center font-bold"></div>
+                  <div className="text-center text-xl font-bold">
+                    No Matches Found
+                  </div>
+                  <div className="text-center font-bold"></div>
+                </>
+              )}
             </div>
           </div>
         ) : (

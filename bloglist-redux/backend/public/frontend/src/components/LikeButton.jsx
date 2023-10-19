@@ -4,11 +4,11 @@ export const LikeButton = ({ blog, handleLike }) => {
     <div>
       <button
         className="likeBtn px-2  
-   rounded-md flex gap-1 transition-all duration-150 ease-in-out;"
+   rounded-md flex group gap-1 transition-all duration-150 ease-in-out;"
         onClick={() => handleLike(blog)}
       >
         <span>Like</span>
-        <span className=" hover:opacity-100 opacity-50 transition-all duration-150 ease-in-out text-lg">
+        <span className=" group-hover:opacity-100 opacity-50 transition-all duration-150 ease-in-out text-lg mt-[2px]">
           <FcLike />
         </span>
       </button>

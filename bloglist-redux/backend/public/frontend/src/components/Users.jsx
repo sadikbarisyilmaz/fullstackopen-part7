@@ -17,13 +17,13 @@ export const Users = ({ users, loggedUser }) => {
               <table className="min-w-full divide-y-2 divide-gray-200 bg-white  text-sm">
                 <thead className="ltr:text-left rtl:text-right">
                   <tr>
-                    <th className="px-2 sm:px-4 py-2 font-medium text-gray-900">
+                    <th className="px-2 sm:px-4 py-2 font-bold text-gray-900">
                       User Name
                     </th>
-                    <th className="px-2 sm:px-4 py-2 font-medium text-gray-900">
+                    <th className="px-2 sm:px-4 py-2 font-bold text-gray-900">
                       Name
                     </th>
-                    <th className="px-2 sm:px-4 py-2 font-medium text-gray-900">
+                    <th className="px-2 sm:px-4 py-2 font-bold text-gray-900">
                       Number of Blogs
                     </th>
                   </tr>
@@ -35,21 +35,21 @@ export const Users = ({ users, loggedUser }) => {
                         <tr className=" text-xsmd:text-sm" key={i}>
                           <td className="px-2 sm:px-4 py-2 font-medium text-gray-900">
                             <Link to={`/users/${user.id}`}>
-                              <div className=" flex justiw-full">
+                              <div className=" flex justify-center w-full">
                                 {user.username}
                               </div>
                             </Link>
                           </td>
                           <td className="px-2 sm:px-4 py-2 text-center text-gray-700">
                             <Link to={`/users/${user.id}`}>
-                              <div className=" flex justiw-full">
+                              <div className=" flex justify-center w-full">
                                 {user.name}
                               </div>
                             </Link>
                           </td>
                           <td className="px-2 sm:px-4 py-2 text-center text-gray-700">
                             <Link to={`/users/${user.id}`}>
-                              <div className=" flex justiw-full">
+                              <div className=" flex justify-center w-full">
                                 {user.blogs.length}
                               </div>
                             </Link>
